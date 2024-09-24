@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChangeStatusController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -9,3 +10,6 @@ Route::get('/', function () {
 Route::get('/time-assigned', function () {
     return view('time-assigned');
 });
+
+Route::get('/time-assigned', [ChangeStatusController::class, 'index'])
+->name('time-assigned.index');
