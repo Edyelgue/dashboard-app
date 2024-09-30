@@ -14,8 +14,8 @@ class ChangeStatusController extends Controller
 
         // Formatando as datas
         foreach ($changes as $change) {
+            $change->earliest_submit_date = Carbon::parse($change->earliest_submit_date)->format('d/m/Y H:i:s');
             $change->createdate = Carbon::parse($change->createdate)->format('d/m/Y H:i:s');
-            $change->modifieddate = Carbon::parse($change->modifieddate)->format('d/m/Y H:i:s');
         }
 
         // Passando os dados formatados para a view

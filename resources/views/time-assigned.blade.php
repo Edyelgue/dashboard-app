@@ -22,8 +22,8 @@
         </thead>
         <tbody>
           @php
-            // Ordenar por DiferencaEmHoras da maior para a menor
-            $sortedChanges = $changes->sortByDesc('DiferencaEmHoras');
+            // Ordenar por time_assigned da maior para a menor
+            $sortedChanges = $changes->sortByDesc('time_assigned');
           @endphp
 
           @foreach ($sortedChanges as $change)
@@ -39,11 +39,11 @@
               @endphp
               {{ $formattedSubmitter }}
             </td>
+            <td class="px-4 py-3">{{ $change->earliest_submit_date }}</td>
             <td class="px-4 py-3">{{ $change->createdate }}</td>
-            <td class="px-4 py-3">{{ $change->modifieddate }}</td>
             @php
               // Pegar o valor decimal de horas
-              $decimalHours = $change->DiferencaEmHoras;
+              $decimalHours = $change->time_assigned;
 
               // Calcular horas
               $hours = floor($decimalHours);

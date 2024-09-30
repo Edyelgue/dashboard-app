@@ -1,0 +1,62 @@
+-- database: ../database/database.sqlite
+
+SELECT * FROM change_status_incident;
+
+SELECT
+    worklogsubmitter,
+    incidentid,
+    earliest_submit_date,
+    createdate,
+    (julianday(DATETIME(createdate)) - julianday(DATETIME(earliest_submit_date))
+    ) AS time_assigned,
+    notes,
+    incidentsummary,
+    dsk_gst_massiverelated
+FROM
+    change_status_incident
+WHERE dsk_gst_massiverelated = 'Não'
+AND notes LIKE '%Assigned To: %'
+AND incidentsummary LIKE '%Massive number of unavailable resources%'
+;
+
+SELECT
+    worklogsubmitter,
+    incidentid,
+    MIN(earliest_submit_date) AS earliest_submit_date,
+    MIN(createdate) AS createdate,
+    (julianday(MIN(DATETIME(createdate))) - julianday(MIN(DATETIME(earliest_submit_date)))) AS time_assigned,
+    notes,
+    incidentsummary,
+    dsk_gst_massiverelated
+FROM
+    change_status_incident
+WHERE 
+    dsk_gst_massiverelated = 'Não'
+    AND notes LIKE '%Assigned To: %'
+    AND incidentsummary LIKE '%Massive number of unavailable resources%'
+    AND worklogsubmitter IN (
+        'edgard.araujo',
+        'marcos.jesus',
+        'samuel.fagundes',
+        'samuel.souza',
+        'evandro.pereira',
+        'camilly.psilva',
+        'jeferson.dorta',
+        'gabriel.martins',
+        'mateus.tofani',
+        'murilo.medeiros',
+        'otavio.souza',
+        'lucas.angelo',
+        'eduardo.rezende',
+        'jepherson.lins',
+        'pedro.santos',
+        'rafael.olima',
+        'vinicius.mareti'
+    )
+GROUP BY 
+    incidentid, 
+    worklogsubmitter, 
+    notes, 
+    incidentsummary, 
+    dsk_gst_massiverelated
+LIMIT 10;

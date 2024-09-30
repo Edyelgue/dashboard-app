@@ -1,14 +1,25 @@
 <?php
 
-namespace App\Models;
+namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ChangeStatusDTO
+class IncidentController extends Controller
 {
-    public static function listar()
+    /**
+     * Listar incidentes dos últimos 7 dias com base na coluna earliest_submit_date.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function listarUltimos7Dias()
     {
-        return DB::connection('sqlite')
+        // Define a data de hoje e a data de 7 dias atrás
+        $dataHoje = now();
+        $data7DiasAtras = now()->subDays(7);
+
+        // Executa a consulta filtrando pelos últimos 7 dias
+        $resultados = DB::connection('sqlite')
             ->table('change_status_incident')
             ->select(
                 'worklogsubmitter',
@@ -42,6 +53,8 @@ class ChangeStatusDTO
                 'rafael.olima',
                 'vinicius.mareti'
             ])
+            // Filtro para as últimas 7 datas usando earliest_submit_date
+            ->whereBetween('earliest_submit_date', [$data7DiasAtras, $dataHoje])
             ->groupBy(
                 'incidentid',
                 'worklogsubmitter',
@@ -49,8 +62,10 @@ class ChangeStatusDTO
                 'incidentsummary',
                 'dsk_gst_massiverelated'
             )
-            // ->orderByDesc('time_assigned')
-            // ->limit(10)
+            ->orderByDesc('earliest_submit_date') // Ordenar pelos últimos mais recentes
             ->get();
+
+        // Retorna os resultados em formato JSON
+        return response()->json($resultados);
     }
 }
