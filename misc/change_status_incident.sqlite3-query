@@ -1,0 +1,70 @@
+-- database: ../database/database.sqlite
+
+-- Pressione o botão ▷ no canto superior direito da janela para executar todo o arquivo.
+
+SELECT createdate, modifieddate, worklogsubmitter, incidentid,
+       (JULIANDAY(modifieddate) - JULIANDAY(createdate)) AS DiferencaEmHoras
+FROM change_status_incident
+WHERE createdate >= DATETIME('2024-09-10 23:56:55', '-7 days') 
+AND notes LIKE '%Assigned To: %'
+AND notes NOT LIKE '%Assigned To: helix.user%'
+ORDER BY modifieddate DESC;
+
+SELECT * 
+FROM change_status_incident;
+
+DROP 
+TABLE change_status_incident;
+
+SELECT * 
+FROM change_status_incident 
+WHERE incidentid = 'INC000000755526';
+
+SELECT * 
+FROM change_status_incident 
+WHERE dsk_gst_massiverelated = 'Não';
+
+SELECT 
+worklogsubmitter, incidentid, earliest_submit_date, createdate
+FROM change_status_incident
+WHERE dsk_gst_massiverelated = 'Não'
+AND notes LIKE '%Assigned To:%';
+
+SELECT 
+    worklogsubmitter, 
+    incidentid, 
+    MIN(earliest_submit_date) AS earliest_submit_date, 
+    createdate, 
+    (julianday(createdate) - julianday(earliest_submit_date)) AS time_assigned
+FROM 
+    change_status_incident
+WHERE 
+    dsk_gst_massiverelated = 'Não'
+    AND notes LIKE '%Assigned To:%'
+    AND worklogsubmitter IN (
+        'edgard.araujo',
+        'marcos.jesus',
+        'samuel.fagundes',
+        'samuel.souza',
+        'evandro.pereira',
+        'camilly.psilva',
+        'gabriel.martins',
+        'mateus.tofani',
+        'murilo.medeiros',
+        'otavio.souza',
+        'lucas.angelo',
+        'eduardo.rezende',
+        'jepherson.lins',
+        'pedro.santos',
+        'rafael.olima',
+        'vinicius.mareti',
+        'jeferson.dorta'
+    )
+    AND incidentsummary NOT LIKE '%GMUD%'
+    AND incidentsummary NOT LIKE '%PREVENTIVA%'
+    AND createdate >= DATE('now', '-7 days')  -- Limitando para os registros dos últimos 7 dias
+GROUP BY 
+    worklogsubmitter, 
+    incidentid, 
+    createdate, 
+    notes;
