@@ -16,3 +16,5 @@ Route::get('/time-assigned', [ChangeStatusController::class, 'index'])
 ->name('time-assigned.index');
 
 Route::get('/incidentes-ultimos-7-dias', [IncidentController::class, 'listarUltimos7Dias']);
+
+Route::get('/media-time-assigned', [ChangeStatusController::class, 'media']);

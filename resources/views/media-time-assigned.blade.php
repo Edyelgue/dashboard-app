@@ -1,42 +1,36 @@
-@include('layouts.header')
-<section class="text-gray-600 body-font">
-  <div class="container mx-auto flex flex-col px-5 py-4 justify-center items-center">
-    <canvas id="myChart"></canvas>
-  </div>
-</section>
-<section class="text-gray-600 body-font">
-  <div class="container px-1 py-24 mx-auto">
-    <div class="flex flex-col text-center w-full mb-20">
-      <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2">Incidentes</h1>
-    </div>
-    <div class="lg:w-2/3 w-full mx-auto overflow-auto">
-      <table class="table-auto w-full text-left whitespace-no-wrap">
-        <thead>
-          <tr>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl"><strong>Incidente</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"><strong>Designado por</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"><strong>Data Criado</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"><strong>Data Designado</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"><strong>Tempo na Fila até Designar</strong></th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($changes as $change)
-          <tr>
-            <td class="px-4 py-3">{{ $change->incidentid }}</td>
-            <td class="px-4 py-3">{{ $change->worklogsubmitter }}</td>
-            <td class="px-4 py-3">{{ $change->earliest_submit_date }}</td>
-            <td class="px-4 py-3">{{ $change->min_createdate }}</td>
-            <td class="px-4 py-3 text-lg">{{ $change->time_assigned }}</td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Médias de Time Assigned por Analista</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        #myChart {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
 
-<script>
+    <div style="width: 75%; margin: auto;">
+        <h2>Médias de Time Assigned por Analista</h2>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
         const labels = @json($analistas);  // Nomes dos analistas
         const times = @json($medias);      // Médias de time_assigned em hh:mm:ss
 
@@ -44,7 +38,7 @@
         const data = {
             labels: labels,
             datasets: [{
-                label: 'Tempo Médio p/ Designar',
+                label: 'Média de Time Assigned (hh:mm:ss)',
                 data: times.map(timeToSeconds),  // Converte cada tempo para segundos para o gráfico
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
@@ -108,4 +102,6 @@
             return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
         }
     </script>
-@include('layouts.footer')
+
+</body>
+</html>
