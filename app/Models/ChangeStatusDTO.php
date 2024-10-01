@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ChangeStatusDTO
 {
@@ -13,16 +14,10 @@ class ChangeStatusDTO
             ->select(
                 'worklogsubmitter',
                 'incidentid',
-                DB::raw('MIN(earliest_submit_date) AS earliest_submit_date'),
-                DB::raw('MIN(createdate) AS createdate'),
-                DB::raw('(julianday(MIN(DATETIME(createdate))) - julianday(MIN(DATETIME(earliest_submit_date)))) AS time_assigned'),
-                'notes',
-                'incidentsummary',
-                'dsk_gst_massiverelated'
+                'earliest_submit_date',
+                'min_createdate',
+                DB::raw('julianday(coalesce(min_createdate, 0)) - julianday(coalesce(earliest_submit_date, 0)) AS time_assigned') // Fixed aliasing and julianday calculation
             )
-            ->where('dsk_gst_massiverelated', 'Não')
-            ->where('notes', 'LIKE', '%Assigned To: %')
-            ->where('incidentsummary', 'LIKE', '%Massive number of unavailable resources%')
             ->whereIn('worklogsubmitter', [
                 'edgard.araujo',
                 'marcos.jesus',
@@ -42,15 +37,14 @@ class ChangeStatusDTO
                 'rafael.olima',
                 'vinicius.mareti'
             ])
+            ->whereDate('min_createdate', '>=', Carbon::now()->subDays(7)) // Filter records from the last 7 days
             ->groupBy(
                 'incidentid',
-                'worklogsubmitter',
-                'notes',
-                'incidentsummary',
-                'dsk_gst_massiverelated'
+                'worklogsubmitter'
             )
-            // ->orderByDesc('time_assigned')
-            // ->limit(10)
+            ->orderByDesc('earliest_submit_date')
+            // ->limit(50)
             ->get();
     }
 }
+

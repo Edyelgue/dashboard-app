@@ -18,8 +18,8 @@ class ChangeStatusController extends Controller
             $change->earliest_submit_date = 
                 Carbon::parse($change->earliest_submit_date)
                 ->format('d/m/Y H:i:s');
-            $change->createdate = 
-                Carbon::parse($change->createdate)
+            $change->min_createdate = 
+                Carbon::parse($change->min_createdate)
                 ->format('d/m/Y H:i:s');
             
             // Convertendo time_assigned (em dias) para horas, minutos e segundos

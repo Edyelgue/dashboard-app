@@ -62,9 +62,50 @@ WHERE
     )
     AND incidentsummary NOT LIKE '%GMUD%'
     AND incidentsummary NOT LIKE '%PREVENTIVA%'
-    AND createdate >= DATE('now', '-7 days')  -- Limitando para os registros dos últimos 7 dias
+    -- AND createdate >= DATE('now', '-7 days')  -- Limitando para os registros dos últimos 7 dias
 GROUP BY 
     worklogsubmitter, 
     incidentid, 
     createdate, 
     notes;
+
+SELECT 
+    worklogsubmitter, 
+    incidentid, 
+    MIN(earliest_submit_date) AS earliest_submit_date, 
+    createdate, 
+    (julianday(createdate) - julianday(earliest_submit_date)) AS time_assigned
+FROM 
+    change_status_incident
+WHERE 
+    dsk_gst_massiverelated = 'Não'
+    AND notes LIKE '%Assigned To:%'
+    AND worklogsubmitter IN (
+        'edgard.araujo',
+        'marcos.jesus',
+        'samuel.fagundes',
+        'samuel.souza',
+        'evandro.pereira',
+        'camilly.psilva',
+        'gabriel.martins',
+        'mateus.tofani',
+        'murilo.medeiros',
+        'otavio.souza',
+        'lucas.angelo',
+        'eduardo.rezende',
+        'jepherson.lins',
+        'pedro.santos',
+        'rafael.olima',
+        'vinicius.mareti',
+        'jeferson.dorta'
+    )
+    AND incidentsummary NOT LIKE '%GMUD%'
+    AND incidentsummary NOT LIKE '%PREVENTIVA%'
+    -- AND createdate >= DATE('now', '-7 days')  -- Limitando para os registros dos últimos 7 dias
+GROUP BY 
+    worklogsubmitter, 
+    incidentid, 
+    createdate, 
+    notes;
+
+DROP TABLE change_status_incident;

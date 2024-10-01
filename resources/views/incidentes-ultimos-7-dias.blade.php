@@ -27,7 +27,7 @@
                         <td>{{ $incident->worklogsubmitter }}</td>
                         <td>{{ $incident->incidentid }}</td>
                         <td>{{ \Carbon\Carbon::parse($incident->earliest_submit_date)->format('d/m/Y H:i') }}</td>
-                        <td>{{ \Carbon\Carbon::parse($incident->createdate)->format('d/m/Y H:i') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($incident->min_createdate)->format('d/m/Y H:i') }}</td>
                         <td>{{ number_format($incident->time_assigned, 2) }}</td>
                         <td>{{ $incident->notes }}</td>
                         <td>{{ $incident->incidentsummary }}</td>
