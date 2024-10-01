@@ -25,8 +25,8 @@ class IncidentController extends Controller
                 'worklogsubmitter',
                 'incidentid',
                 DB::raw('MIN(earliest_submit_date) AS earliest_submit_date'),
-                DB::raw('MIN(createdate) AS createdate'),
-                DB::raw('(julianday(MIN(DATETIME(createdate))) - julianday(MIN(DATETIME(earliest_submit_date)))) AS time_assigned'),
+                DB::raw('MIN(min_createdate) AS min_createdate'),
+                DB::raw('(julianday(MIN(DATETIME(min_createdate))) - julianday(MIN(DATETIME(earliest_submit_date)))) AS time_assigned'),
                 'notes',
                 'incidentsummary',
                 'dsk_gst_massiverelated'

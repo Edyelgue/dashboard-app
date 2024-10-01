@@ -6,8 +6,8 @@ SELECT
     worklogsubmitter,
     incidentid,
     earliest_submit_date,
-    createdate,
-    (julianday(DATETIME(createdate)) - julianday(DATETIME(earliest_submit_date))
+    min_createdate,
+    (julianday(DATETIME(min_createdate)) - julianday(DATETIME(earliest_submit_date))
     ) AS time_assigned,
     notes,
     incidentsummary,
@@ -23,8 +23,8 @@ SELECT
     worklogsubmitter,
     incidentid,
     MIN(earliest_submit_date) AS earliest_submit_date,
-    MIN(createdate) AS createdate,
-    (julianday(MIN(DATETIME(createdate))) - julianday(MIN(DATETIME(earliest_submit_date)))) AS time_assigned,
+    MIN(min_createdate) AS min_createdate,
+    (julianday(MIN(DATETIME(min_createdate))) - julianday(MIN(DATETIME(earliest_submit_date)))) AS time_assigned,
     notes,
     incidentsummary,
     dsk_gst_massiverelated
