@@ -1,5 +1,5 @@
 @include('layouts.header')
-<section class="text-gray-600 body-font flex h-full">
+<section class="text-gray-600 body-font flex h-full pt-36">
   <div class="container px-5 py-24 mx-auto">
     <div class="flex flex-wrap -m-2">
       <div class="p-2 lg:w-1/3 md:w-1/2 w-full">

@@ -15,7 +15,7 @@ class ChangeStatusController extends Controller
     public function index()
     {
         // Quantidade de registros por página
-        $perPage = 10;
+        $perPage = 20;
 
         // Chamando o método listar() e utilizando a paginação
         $changesCollection = collect(ChangeStatusDTO::listar()); // Converte para uma coleção para usar paginação

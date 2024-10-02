@@ -16,6 +16,7 @@ class ChangeStatusDTO
                 'incidentid',
                 'earliest_submit_date',
                 'min_createdate',
+                'incidentsummary',
                 DB::raw('julianday(coalesce(min_createdate, 0)) - julianday(coalesce(earliest_submit_date, 0)) AS time_assigned') // Fixed aliasing and julianday calculation
             )
             ->whereIn('worklogsubmitter', [
@@ -37,12 +38,13 @@ class ChangeStatusDTO
                 'rafael.olima',
                 'vinicius.mareti'
             ])
-            ->whereDate('min_createdate', '>=', Carbon::now()->subDays(10)) // Filter records from the last 7 days
+            ->where('incidentid', 'not like', '%GMUD%') // Exclude records with 'GMUD' in incidentid
+            ->whereDate('min_createdate', '>=', Carbon::now()->subDays(7)) // Filter records from the last 7 days
             ->groupBy(
                 'incidentid',
                 'worklogsubmitter'
             )
-            ->orderByDesc('earliest_submit_date')
+            ->orderByDesc('time_assigned')
             // ->limit(50)
             ->get();
     }

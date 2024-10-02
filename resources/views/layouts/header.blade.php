@@ -14,20 +14,21 @@
 </head>
 
 <body class="h-full">
-    <header class="text-gray-600 body-font">
-        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <header class="text-gray-600 body-font fixed flex justify-between w-full bg-black z-10">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
             <a class="flex title-font font-medium items-center mb-4 md:mb-0">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                </svg>
-                <span class="ml-3 text-xl font-bold"><a href="/" class="font-semibold">NOC</a></span>
+                <img src="{{ asset('images/logo-desktop.png') }}" alt="Descrição da Imagem" class="h-10 bg-black">
             </a>
-            <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+
+
+            <!-- Menu de navegação -->
+            <nav id="menu" class="hidden lg:flex md:ml-auto md:mr-auto flex-wrap items-center text-base justify-center w-full md:w-auto">
                 <a class="mr-5 hover:text-gray-900" href="/">Incidente</a><span class="mr-5 text-gray-300 font-thin">|</span>
                 <a class="mr-5 hover:text-gray-900" href="#">Solicitação de Mudança</a><span class="mr-5 text-gray-300 font-thin">|</span>
                 <a class="mr-5 hover:text-gray-900" href="#">Investigação de Problema</a><span class="mr-5 text-gray-300 font-thin">|</span>
                 <a class="mr-5 hover:text-gray-900" href="#">Ordem de Trabalho</a>
             </nav>
+
             <div class="dropdown">
                 <div tabindex="0" role="button" class="btn m-1">
                     Theme
@@ -60,5 +61,25 @@
                     </li>
                 </ul>
             </div>
+            <!-- Ícone de hambúrguer para telas pequenas -->
+            <button id="menu-toggle" class="block lg:hidden text-white focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+            <!-- Menu de navegação -->
+            <nav id="menu" class="hidden lg:flex md:ml-auto md:mr-auto flex-wrap items-center text-base justify-center w-full md:w-auto">
+                <a class="mr-5 hover:text-gray-900" href="/">Incidente</a><span class="mr-5 text-gray-300 font-thin">|</span>
+                <a class="mr-5 hover:text-gray-900" href="#">Solicitação de Mudança</a><span class="mr-5 text-gray-300 font-thin">|</span>
+                <a class="mr-5 hover:text-gray-900" href="#">Investigação de Problema</a><span class="mr-5 text-gray-300 font-thin">|</span>
+                <a class="mr-5 hover:text-gray-900" href="#">Ordem de Trabalho</a>
+            </nav>
         </div>
     </header>
+    <script>
+        // Script para alternar a visibilidade do menu no modo mobile
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>

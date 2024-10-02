@@ -1,5 +1,5 @@
 @include('layouts.header')
-<section class="text-gray-600 body-font">
+<section class="text-gray-600 body-font pt-36">
   <div class="container mx-auto flex flex-col px-5 py-4 justify-center items-center">
     <canvas id="myChart"></canvas>
   </div>
@@ -10,12 +10,13 @@
     <div class="flex flex-col text-center w-full mb-20">
       <h1 class="sm:text-4xl text-3xl font-large title-font mb-2 text-gray-400">Incidentes</h1>
     </div>
-    <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+    <div class="lg:w-5/6 w-full mx-auto overflow-auto">
       <table class="table-auto w-full text-left whitespace-no-wrap">
         <thead>
           <tr>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400 rounded-tl rounded-bl"><strong>Incidente</strong></th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400"><strong>Designado por</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400"><strong>Descrição</strong></th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400"><strong>Data Criado</strong></th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400"><strong>Data Designado</strong></th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400 rounded-tr rounded-br"><strong>Tempo na Fila até Designar</strong></th>
@@ -24,11 +25,12 @@
         <tbody>
           @foreach ($changes as $change)
           <tr>
-            <td class="px-4 py-3 text-gray-400">{{ $change->incidentid }}</td>
-            <td class="px-4 py-3 text-gray-400">{{ $change->worklogsubmitter }}</td>
-            <td class="px-4 py-3 text-gray-400">{{ $change->earliest_submit_date }}</td>
-            <td class="px-4 py-3 text-gray-400">{{ $change->min_createdate }}</td>
-            <td class="px-4 py-3 text-gray-400 text-lg">{{ $change->time_assigned }}</td>
+            <td class="px-4 py-1 text-gray-500">{{ $change->incidentid }}</td>
+            <td class="px-4 py-1 text-gray-500">{{ $change->worklogsubmitter }}</td>
+            <td class="px-4 py-1 text-gray-500">{{ $change->incidentsummary }}</td>
+            <td class="px-4 py-1 text-gray-500">{{ $change->earliest_submit_date }}</td>
+            <td class="px-4 py-1 text-gray-500">{{ $change->min_createdate }}</td>
+            <td class="px-4 py-1 text-gray-500 text-lg">{{ $change->time_assigned }}</td>
           </tr>
           @endforeach
         </tbody>
