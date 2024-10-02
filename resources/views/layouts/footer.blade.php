@@ -1,8 +1,8 @@
-<footer class="text-gray-600 body-font">
+<!-- <footer class="text-gray-600 body-font">
     <div class="bg-gray-100">
         <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-            <p class="text-gray-500 text-sm text-center sm:text-left">© 2020 Tailblocks —
-                <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" class="text-gray-600 ml-1" target="_blank">@knyttneve</a>
+            <p class="text-gray-500 text-sm text-center sm:text-left">© 2024 Desktop —
+                <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" class="text-gray-600 ml-1" target="_blank">@ecarneiro</a>
             </p>
             <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
                 <a class="text-gray-500">
@@ -30,7 +30,7 @@
             </span>
         </div>
     </div>
-</footer>
+</footer> -->
 </body>
 
 </html>
