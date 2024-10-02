@@ -4,37 +4,44 @@
     <canvas id="myChart"></canvas>
   </div>
 </section>
+</section>
 <section class="text-gray-600 body-font">
   <div class="container px-1 py-24 mx-auto">
     <div class="flex flex-col text-center w-full mb-20">
-      <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2">Incidentes</h1>
+      <h1 class="sm:text-4xl text-3xl font-large title-font mb-2 text-gray-400">Incidentes</h1>
     </div>
     <div class="lg:w-2/3 w-full mx-auto overflow-auto">
       <table class="table-auto w-full text-left whitespace-no-wrap">
         <thead>
           <tr>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl"><strong>Incidente</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"><strong>Designado por</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"><strong>Data Criado</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"><strong>Data Designado</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100"><strong>Tempo na Fila até Designar</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400 rounded-tl rounded-bl"><strong>Incidente</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400"><strong>Designado por</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400"><strong>Data Criado</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400"><strong>Data Designado</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400 rounded-tr rounded-br"><strong>Tempo na Fila até Designar</strong></th>
           </tr>
         </thead>
         <tbody>
           @foreach ($changes as $change)
           <tr>
-            <td class="px-4 py-3">{{ $change->incidentid }}</td>
-            <td class="px-4 py-3">{{ $change->worklogsubmitter }}</td>
-            <td class="px-4 py-3">{{ $change->earliest_submit_date }}</td>
-            <td class="px-4 py-3">{{ $change->min_createdate }}</td>
-            <td class="px-4 py-3 text-lg">{{ $change->time_assigned }}</td>
+            <td class="px-4 py-3 text-gray-400">{{ $change->incidentid }}</td>
+            <td class="px-4 py-3 text-gray-400">{{ $change->worklogsubmitter }}</td>
+            <td class="px-4 py-3 text-gray-400">{{ $change->earliest_submit_date }}</td>
+            <td class="px-4 py-3 text-gray-400">{{ $change->min_createdate }}</td>
+            <td class="px-4 py-3 text-gray-400 text-lg">{{ $change->time_assigned }}</td>
           </tr>
           @endforeach
         </tbody>
       </table>
+
+      <!-- Adicione os links de paginação aqui -->
+      <div class="mt-4">
+        {{ $changes->links() }}
+      </div>
     </div>
   </div>
 </section>
+
 
 <script>
   // Dados dos analistas e médias passados da função media()
@@ -62,7 +69,7 @@
     type: 'bar', // Tipo de gráfico (barras)
     data: data,
     options: {
-      responsive: true,  // Torna o gráfico responsivo
+      responsive: true, // Torna o gráfico responsivo
       maintainAspectRatio: true, // Permite ajustar a proporção ao redimensionar
       responsive: true,
       plugins: {
@@ -75,7 +82,7 @@
           formatter: function(value) {
             return secondsToTime(value); // Formata o valor como hh:mm:ss
           },
-          color: '#000', // Cor do texto
+          color: '#666666', // Cor do texto
           font: {
             weight: 'regular'
           }
@@ -89,7 +96,7 @@
             callback: function(value) {
               return secondsToTime(value);
             },
-            stepSize: 1500    // Intervalo entre os valores
+            stepSize: 1200 // Intervalo entre os valores
           }
         }
       }

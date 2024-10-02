@@ -5,11 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <!-- <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" /> -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>NOC</title>
 </head>
 
@@ -20,16 +18,13 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                 </svg>
-                <span class="ml-3 text-xl"><a href="/">NOC</a></span>
+                <span class="ml-3 text-xl font-bold"><a href="/" class="font-semibold">NOC</a></span>
             </a>
             <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                    <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" />
-                </svg>
-                <a class="mr-5 hover:text-gray-900" href="/">Home</a>
-                <a class="mr-5 hover:text-gray-900">Second Link</a>
-                <a class="mr-5 hover:text-gray-900">Third Link</a>
-                <a class="mr-5 hover:text-gray-900">Fourth Link</a>
+                <a class="mr-5 hover:text-gray-900" href="/">Incidente</a><span class="mr-5 text-gray-300 font-thin">|</span>
+                <a class="mr-5 hover:text-gray-900" href="#">Solicitação de Mudança</a><span class="mr-5 text-gray-300 font-thin">|</span>
+                <a class="mr-5 hover:text-gray-900" href="#">Investigação de Problema</a><span class="mr-5 text-gray-300 font-thin">|</span>
+                <a class="mr-5 hover:text-gray-900" href="#">Ordem de Trabalho</a>
             </nav>
             <div class="dropdown">
                 <div tabindex="0" role="button" class="btn m-1">
@@ -49,24 +44,9 @@
                             type="radio"
                             name="theme-dropdown"
                             class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                            aria-label="Default"
-                            value="light" />
-                    </li>
-                    <li>
-                        <input
-                            type="radio"
-                            name="theme-dropdown"
-                            class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                            aria-label="Night"
-                            value="night" />
-                    </li>
-                    <li>
-                        <input
-                            type="radio"
-                            name="theme-dropdown"
-                            class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                            aria-label="Dracula"
-                            value="dracula" />
+                            aria-label="Light"
+                            value="cupcake"
+                            checked />
                     </li>
                     <li>
                         <input
@@ -75,15 +55,6 @@
                             class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
                             aria-label="Dark"
                             value="dark" />
-                    </li>
-                    <li>
-                        <input
-                            type="radio"
-                            name="theme-dropdown"
-                            class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                            aria-label="Cupcake"
-                            value="cupcake"
-                            checked />
                     </li>
                 </ul>
             </div>
