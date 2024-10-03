@@ -38,7 +38,7 @@ class ChangeStatusDTO
                 'rafael.olima',
                 'vinicius.mareti'
             ])
-            ->where('incidentid', 'not like', '%GMUD%') // Exclude records with 'GMUD' in incidentid
+            ->where('incident', 'not like', '%GMUD%') // Exclude records with 'GMUD' in incidentid
             ->whereDate('min_createdate', '>=', Carbon::now()->subDays(7)) // Filter records from the last 7 days
             ->groupBy(
                 'incidentid',
