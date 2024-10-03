@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\ChangeStatusDTO;
@@ -63,7 +64,7 @@ class ChangeStatusController extends Controller
         // Chamando o método listar()
         $changes = ChangeStatusDTO::listar();
 
-        // Inicializando array para agrupar os tempos por analista
+        // Inicializando array para agrupar os tempos e a contagem por analista
         $analistas = [];
 
         foreach ($changes as $change) {
@@ -73,23 +74,26 @@ class ChangeStatusController extends Controller
             if (!isset($analistas[$analista])) {
                 $analistas[$analista] = [
                     'total_seconds' => 0,
-                    'count' => 0
+                    'count' => 0,
+                    'repeticoes' => 0 // Adicionando contador de repetições
                 ];
             }
 
             // Convertendo time_assigned (em dias) para segundos
             $totalSeconds = $change->time_assigned * 24 * 60 * 60;
 
-            // Adicionando o tempo para o analista correspondente
+            // Adicionando o tempo e incrementando a contagem de repetições
             $analistas[$analista]['total_seconds'] += $totalSeconds;
             $analistas[$analista]['count'] += 1;
+            $analistas[$analista]['repeticoes'] += 1; // Incrementando repetições
         }
 
-        // Inicializando arrays para armazenar os analistas e suas médias
+        // Inicializando arrays para armazenar os analistas, suas médias e repetições
         $nomesAnalistas = [];
         $medias = [];
+        $repeticoes = [];
 
-        // Calculando a média de time_assigned para cada analista
+        // Calculando a média de time_assigned e coletando o número de repetições para cada analista
         foreach ($analistas as $analista => $dados) {
             $mediaSegundos = $dados['total_seconds'] / $dados['count'];
 
@@ -98,13 +102,14 @@ class ChangeStatusController extends Controller
             $minutes = floor(($mediaSegundos % 3600) / 60);
             $seconds = $mediaSegundos % 60;
 
-            // Guardando as médias como uma string de horas, minutos e segundos
+            // Guardando as médias e as repetições
             $analista = ucwords(str_replace(".", " ", $analista));
             $nomesAnalistas[] = $analista;  // Lista de nomes de analistas
             $medias[] = sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);  // Média formatada para o analista
+            $repeticoes[] = $dados['repeticoes']; // Número de vezes que o analista aparece
         }
 
-        // Retornando um array em vez de um JSON
-        return compact('nomesAnalistas', 'medias');
+        // Retornando um array em vez de um JSON, incluindo as repetições
+        return compact('nomesAnalistas', 'medias', 'repeticoes');
     }
 }

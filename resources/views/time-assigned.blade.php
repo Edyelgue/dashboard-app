@@ -49,31 +49,42 @@
   // Dados dos analistas e médias passados da função media()
   const analistas = @json($nomesAnalistas); // Nomes dos analistas
   const medias = @json($medias); // Médias de time_assigned em hh:mm:ss
+  const incByAnalist = @json($repeticoes); // Número de incidentes por analista
 
   // Outros dados passados do index() (como 'changes')
   const changes = @json($changes);
 
-  // Use essas variáveis conforme necessário no seu gráfico ou layout
-
   // Prepara os dados para o gráfico
   const data = {
     labels: analistas,
-    datasets: [{
-      label: 'Tempo Médio p/Designar (h)',
-      data: medias.map(timeToSeconds), // Converte cada tempo para segundos para o gráfico
-      backgroundColor: 'rgba(54, 162, 235, 0.2)',
-      borderColor: 'rgba(54, 162, 235, 1)',
-      borderWidth: 1
-    }]
+    datasets: [
+      {
+        label: 'Tempo Médio p/Designar (h)',
+        data: medias.map(timeToSeconds), // Converte cada tempo para segundos para o gráfico
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1,
+        yAxisID: 'y',
+      },
+      {
+        label: 'Incidentes por Analista', // IncByAnalist plotado em uma linha
+        data: incByAnalist, // Dados do número de incidentes
+        type: 'line', // Define o tipo de gráfico como linha
+        borderColor: 'rgba(255, 99, 132, 1)', // Cor da linha
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderWidth: 2,
+        fill: false, // Linha sem preenchimento abaixo
+        yAxisID: 'y1', // Usa um segundo eixo Y para a escala dos incidentes
+      }
+    ]
   };
 
   const config = {
-    type: 'bar', // Tipo de gráfico (barras)
+    type: 'bar', // Tipo de gráfico principal (barras)
     data: data,
     options: {
       responsive: true, // Torna o gráfico responsivo
       maintainAspectRatio: true, // Permite ajustar a proporção ao redimensionar
-      responsive: true,
       plugins: {
         legend: {
           display: true,
@@ -81,10 +92,15 @@
         datalabels: {
           anchor: 'end',
           align: 'end',
-          formatter: function(value) {
-            return secondsToTime(value); // Formata o valor como hh:mm:ss
+          formatter: function(value, context) {
+            // Formata o rótulo de tempo médio como hh:mm:ss e o rótulo de incidentes como inteiro
+            if (context.dataset.label === 'Tempo Médio p/Designar (h)') {
+              return secondsToTime(value); // Formata para hh:mm:ss
+            } else {
+              return value.toFixed(0); // Formata para inteiro
+            }
           },
-          color: '#666666', // Cor do texto
+          color: '#666666',
           font: {
             weight: 'regular'
           }
@@ -94,11 +110,23 @@
         y: {
           beginAtZero: true,
           ticks: {
-            // Converte de volta para hh:mm:ss para o rótulo do eixo Y
             callback: function(value) {
-              return secondsToTime(value);
+              return secondsToTime(value); // Converte para hh:mm:ss no eixo Y das barras
             },
-            stepSize: 1200 // Intervalo entre os valores
+            stepSize: 1200 // Intervalo dos ticks do eixo Y das barras
+          }
+        },
+        y1: {
+          beginAtZero: true,
+          position: 'right', // Posiciona o segundo eixo Y à direita
+          grid: {
+            drawOnChartArea: false, // Evita que a grade do y1 interfira no y
+          },
+          ticks: {
+            stepSize: 1, // Intervalo dos ticks do eixo Y da linha (incidentes)
+            callback: function(value) {
+              return value; // Exibe os valores inteiros no eixo Y da linha
+            }
           }
         }
       }
