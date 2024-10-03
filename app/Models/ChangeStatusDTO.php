@@ -13,11 +13,12 @@ class ChangeStatusDTO
             ->table('change_status_incident')
             ->select(
                 'worklogsubmitter',
+                'finished_worklogsubmitter', // Adicionando o campo finished_worklogsubmitter
                 'incidentid',
                 'earliest_submit_date',
                 'min_createdate',
                 'incidentsummary',
-                DB::raw('julianday(coalesce(min_createdate, 0)) - julianday(coalesce(earliest_submit_date, 0)) AS time_assigned') // Fixed aliasing and julianday calculation
+                DB::raw('julianday(coalesce(min_createdate, 0)) - julianday(coalesce(earliest_submit_date, 0)) AS time_assigned') // Alias e cálculo corrigidos
             )
             ->whereIn('worklogsubmitter', [
                 'edgard.araujo',
@@ -38,11 +39,12 @@ class ChangeStatusDTO
                 'rafael.olima',
                 'vinicius.mareti'
             ])
-            ->where('incidentsummary', 'not like', '%GMUD%') // Exclude records with 'GMUD' in incidentid
-            ->whereDate('min_createdate', '>=', Carbon::now()->subDays(7)) // Filter records from the last 7 days
+            ->where('incidentsummary', 'not like', '%GMUD%') // Exclui registros com 'GMUD' no incidentid
+            ->whereDate('min_createdate', '>=', Carbon::now()->subDays(7)) // Filtra registros dos últimos 7 dias
             ->groupBy(
                 'incidentid',
-                'worklogsubmitter'
+                'worklogsubmitter',
+                'finished_worklogsubmitter' // Inclui no agrupamento para evitar erros de agregação
             )
             ->orderByDesc('time_assigned')
             // ->limit(50)

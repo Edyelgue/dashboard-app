@@ -1,4 +1,25 @@
 @include('layouts.header')
+<table>
+    <thead>
+        <tr>
+            <th>Analista</th>
+            <th>Média de Tempo</th>
+            <th>Repetições</th>
+            <th>Same as Finished Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($nomesAnalistas as $index => $analista)
+        <tr>
+            <td>{{ $analista }}</td>
+            <td>{{ $medias[$index] }}</td>
+            <td>{{ $repeticoes[$index] }}</td>
+            <td>{{ $sameAsFinishedCount[$index] }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+
 <section class="text-gray-600 body-font pt-36">
   <div class="container mx-auto flex flex-col px-5 py-4 justify-center items-center">
     <canvas id="myChart"></canvas>
@@ -35,7 +56,6 @@
           @endforeach
         </tbody>
       </table>
-
       <!-- Adicione os links de paginação aqui -->
       <div class="mt-4">
         {{ $changes->links() }}
@@ -57,8 +77,7 @@
   // Prepara os dados para o gráfico
   const data = {
     labels: analistas,
-    datasets: [
-      {
+    datasets: [{
         label: 'Tempo Médio p/Designar (h)',
         data: medias.map(timeToSeconds), // Converte cada tempo para segundos para o gráfico
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -123,7 +142,7 @@
             drawOnChartArea: false, // Evita que a grade do y1 interfira no y
           },
           ticks: {
-            stepSize: 1, // Intervalo dos ticks do eixo Y da linha (incidentes)
+            stepSize: 100, // Intervalo dos ticks do eixo Y da linha (incidentes)
             callback: function(value) {
               return value; // Exibe os valores inteiros no eixo Y da linha
             }
