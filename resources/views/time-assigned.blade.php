@@ -8,18 +8,18 @@
 <section class="text-gray-600 body-font">
   <div class="container px-1 py-24 mx-auto">
     <div class="flex flex-col text-center w-full mb-20">
-      <h1 class="sm:text-4xl text-3xl font-large title-font mb-2 text-gray-400">Incidentes</h1>
+      <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-900">Incidentes</h1>
     </div>
     <div class="lg:w-5/6 w-full mx-auto overflow-auto">
       <table class="table-auto w-full text-left whitespace-no-wrap">
         <thead>
           <tr>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400 rounded-tl rounded-bl"><strong>Incidente</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400"><strong>Designado por</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400"><strong>Descrição</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400"><strong>Data Criado</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400"><strong>Data Designado</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-400 rounded-tr rounded-br"><strong>Tempo na Fila até Designar</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 rounded-tl rounded-bl"><strong>Incidente</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700"><strong>Designado por</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700"><strong>Descrição</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700"><strong>Data Criado</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700"><strong>Data Designado</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 rounded-tr rounded-br"><strong>Tempo na Fila até Designar</strong></th>
           </tr>
         </thead>
         <tbody>
