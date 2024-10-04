@@ -1,26 +1,26 @@
 @include('layouts.header')
-<table>
-    <thead>
-        <tr>
-            <th>Analista</th>
-            <th>Média de Tempo</th>
-            <th>Repetições</th>
-            <th>Same as Finished Count</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($nomesAnalistas as $index => $analista)
-        <tr>
-            <td>{{ $analista }}</td>
-            <td>{{ $medias[$index] }}</td>
-            <td>{{ $repeticoes[$index] }}</td>
-            <td>{{ $sameAsFinishedCount[$index] }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
 
 <section class="text-gray-600 body-font pt-36">
+  <table>
+      <thead>
+          <tr>
+              <th class="px-4 text-left">Analista</th>
+              <th class="px-4">Tempo Médio s/Designar</th>
+              <th class="px-4">Tickets Designados</th>
+              <th class="px-4">Tickets Finalizados</th>
+          </tr>
+      </thead>
+      <tbody>
+          @foreach($nomesAnalistas as $index => $analista)
+          <tr>
+              <td class="px-4">{{ $analista }}</td>
+              <td class="px-4 text-center">{{ $medias[$index] }}</td>
+              <td class="px-4 text-center">{{ $repeticoes[$index] }}</td>
+              <td class="px-4 text-center">{{ $sameAsFinishedCount[$index] }}</td>
+          </tr>
+          @endforeach
+      </tbody>
+  </table>
   <div class="container mx-auto flex flex-col px-5 py-4 justify-center items-center">
     <canvas id="myChart"></canvas>
   </div>
