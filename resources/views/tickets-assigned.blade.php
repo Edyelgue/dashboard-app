@@ -1,27 +1,76 @@
 @include('layouts.header')
-<section class="text-gray-600 body-font pt-36">
-    <div class="container mx-auto flex flex-col px-5 py-4 justify-center items-center">
-        <canvas id="myChart"></canvas>
-    </div>
+<section class="w-screen pt-36 flex flex-row justify-center items-center">
+    <section class="text-gray-600 mr-16">
+        <div class="container flex flex-col items-center mb-2 border rounded">
+            <div class="w-full border-b py-1">
+                <h1 class="text-center">Tickets Fechados</h1>
+            </div>
+
+            <div class="w-full">
+                <h1 class="text-center text-3xl font-medium pt-2 pb-3">70%</h1>
+            </div>
+
+            <div class="w-full border-t py-1">
+                <h1 class="text-center text-xs font-normal">7000</h1>
+            </div>
+        </div>
+
+        <div class="container mx-auto flex flex-col">
+            <canvas id="closedTicketsChart" width="330" height="275"></canvas>
+        </div>
+    </section>
+
+    <section class="text-gray-600">
+        <div class="container flex flex-col items-center mb-2 border rounded">
+            <div class="w-full border-b py-1">
+                <h1 class="text-center">Tickets Cancelados</h1>
+            </div>
+
+            <div class="w-full">
+                <h1 class="text-center text-3xl font-medium pt-2 pb-3">30%</h1>
+            </div>
+
+            <div class="w-full border-t py-1">
+                <h1 class="text-center text-xs font-normal">3000</h1>
+            </div>
+        </div>
+
+        <div class="container mx-auto flex flex-col">
+            <canvas id="canceledTicketsChart" width="330" height="275"></canvas>
+        </div>
+    </section>
+
+    <section class="text-gray-600 ml-16">
+        <div class="container flex flex-col items-center mb-8 border rounded">
+            <div class="w-full border-b py-1">
+                <h1 class="text-center">Total</h1>
+            </div>
+
+            <div class="w-full">
+                <h1 class="text-center text-3xl font-medium pt-2 pb-3">10000</h1>
+            </div>
+        </div>
+
+        <div class="container mx-auto flex flex-col">
+            <canvas id="totalTicketsChart" width="330" height="275"></canvas>
+        </div>
+    </section>
 </section>
 
-<section class="text-gray-600 body-font">
-    <div class="container mx-auto flex flex-col px-5 py-4 justify-center items-center">
-        <canvas id="myChart2"></canvas>
-    </div>
-</section>
-
-<section class="text-gray-600 body-font">
-    <div class="container mx-auto flex flex-col px-5 py-4 justify-center items-center">
-        <canvas id="myChart3"></canvas>
-    </div>
+<section class="w-screen pt-16 flex flex-row justify-center items-center">
+    <section class="text-gray-600">
+        <div class="container mx-auto flex flex-col">
+            <canvas id="canceldAndClosed" width="1118" height="550"></canvas>
+        </div>
+    </section>
 </section>
 
 <script>
-    const data = {
+    // Grafico de tickets fechados por analista
+    const dataClosed = {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
-            label: '# of Votes',
+            label: 'Tickets Fechados',
             data: [12, 19, 3, 5, 2, 3],
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 216, 235, 1)',
@@ -30,9 +79,9 @@
         }]
     };
 
-    const config = {
+    const configClosed = {
         type: 'bar',
-        data: data,
+        data: dataClosed,
         options: {
             responsive: true,
             maintainAspectRatio: true,
@@ -47,6 +96,10 @@
                     font: {
                         weight: 'regular'
                     }
+                },
+                title: {
+                    display: true,
+                    text: 'Total de Tickets Fechados por Analista'
                 }
             },
             scales: {
@@ -59,18 +112,168 @@
     };
 
     const myChart = new Chart(
-        document.getElementById('myChart'),
-        config
+        document.getElementById('closedTicketsChart'),
+        configClosed
     );
+
+    // Grafico de tickets cancelados por analista
+    const dataCanceled = {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: 'Tickets Cancelados',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 216, 235, 1)',
+            borderWidth: 1,
+            yAxisID: 'y'
+        }]
+    };
+
+    const configCanceled = {
+        type: 'bar',
+        data: dataCanceled,
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: true
+                },
+                datalabels: {
+                    anchor: 'end',
+                    alin: 'end',
+                    color: '#666666',
+                    font: {
+                        weight: 'regular'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Total de Tickets Cancelados por Analista'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    };
 
     const myChart2 = new Chart(
-        document.getElementById('myChart2'),
-        config
+        document.getElementById('canceledTicketsChart'),
+        configCanceled
     );
 
+    // Grafico de total de tickets por analista
+    const dataTotal = {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: 'Total de Tickets',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 216, 235, 1)',
+            borderWidth: 1,
+            yAxisID: 'y'
+        }]
+    };
+
+    const configTotal = {
+        type: 'bar',
+        data: dataTotal,
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: true
+                },
+                datalabels: {
+                    anchor: 'end',
+                    alin: 'end',
+                    color: '#666666',
+                    font: {
+                        weight: 'regular'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Total de Tickets por Analista'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    };
+
     const myChart3 = new Chart(
-        document.getElementById('myChart3'),
-        config
+        document.getElementById('totalTicketsChart'),
+        configTotal
+    );
+
+    // Grafico de total de tickets fechados e cancelados por analista
+    const dataClosedAndCanceled = {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [
+            {
+                label: 'Fechados',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 216, 235, 1)',
+                borderWidth: 1,
+                yAxisID: 'y'
+            },
+            {
+                label: 'Cancelados',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: 'rgba(235, 162, 54, 0.2)',
+                borderColor: 'rgba(235, 162, 54, 1)',
+                borderWidth: 1,
+                yAxisID: 'y'
+            },
+        ]
+    };
+
+    const configClosedAndCanceled = {
+        type: 'bar',
+        data: dataClosedAndCanceled,
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: true
+                },
+                datalabels: {
+                    anchor: 'end',
+                    alin: 'end',
+                    color: '#666666',
+                    font: {
+                        weight: 'regular'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Tickets Fechados/Cancelados por Analista'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    };
+
+    const myChart4 = new Chart(
+        document.getElementById('canceldAndClosed'),
+        configClosedAndCanceled
     );
 </script>
 @include('layouts.footer')
