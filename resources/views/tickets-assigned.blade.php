@@ -5,6 +5,18 @@
     </div>
 </section>
 
+<section class="text-gray-600 body-font">
+    <div class="container mx-auto flex flex-col px-5 py-4 justify-center items-center">
+        <canvas id="myChart2"></canvas>
+    </div>
+</section>
+
+<section class="text-gray-600 body-font">
+    <div class="container mx-auto flex flex-col px-5 py-4 justify-center items-center">
+        <canvas id="myChart3"></canvas>
+    </div>
+</section>
+
 <script>
     const data = {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -48,6 +60,16 @@
 
     const myChart = new Chart(
         document.getElementById('myChart'),
+        config
+    );
+
+    const myChart2 = new Chart(
+        document.getElementById('myChart2'),
+        config
+    );
+
+    const myChart3 = new Chart(
+        document.getElementById('myChart3'),
         config
     );
 </script>
