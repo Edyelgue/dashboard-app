@@ -123,7 +123,7 @@
             drawOnChartArea: false, // Evita que a grade do y1 interfira no y
           },
           ticks: {
-            stepSize: 1, // Intervalo dos ticks do eixo Y da linha (incidentes)
+            stepSize: 50, // Intervalo dos ticks do eixo Y da linha (incidentes)
             callback: function(value) {
               return value; // Exibe os valores inteiros no eixo Y da linha
             }
