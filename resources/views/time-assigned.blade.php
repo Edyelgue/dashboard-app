@@ -1,7 +1,6 @@
 @include('layouts.header')
-
 <section class="text-gray-600 body-font pt-36">
-  <table>
+  {{-- <table>
       <thead>
           <tr>
               <th class="px-4 text-left">Analista</th>
@@ -14,13 +13,13 @@
           @foreach($nomesAnalistas as $index => $analista)
           <tr>
               <td class="px-4">{{ $analista }}</td>
-              <td class="px-4 text-center">{{ $medias[$index] }}</td>
-              <td class="px-4 text-center">{{ $repeticoes[$index] }}</td>
-              <td class="px-4 text-center">{{ $sameAsFinishedCount[$index] }}</td>
-          </tr>
-          @endforeach
-      </tbody>
-  </table>
+  <td class="px-4 text-center">{{ $medias[$index] }}</td>
+  <td class="px-4 text-center">{{ $repeticoes[$index] }}</td>
+  <td class="px-4 text-center">{{ $sameAsFinishedCount[$index] }}</td>
+  </tr>
+  @endforeach
+  </tbody>
+  </table> --}}
   <div class="container mx-auto flex flex-col px-5 py-4 justify-center items-center">
     <canvas id="myChart"></canvas>
   </div>
@@ -31,16 +30,19 @@
     <div class="flex flex-col text-center w-full mb-20">
       <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-900">Incidentes</h1>
     </div>
-    <div class="lg:w-5/6 w-full mx-auto overflow-auto">
+    <div class="w-full mx-auto overflow-auto">
       <table class="table-auto w-full text-left whitespace-no-wrap">
         <thead>
           <tr>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 rounded-tl rounded-bl"><strong>Incidente</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700"><strong>Designado por</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700"><strong>Descrição</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700"><strong>Data Criado</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700"><strong>Data Designado</strong></th>
-            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 rounded-tr rounded-br"><strong>Tempo na Fila até Designar</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100 rounded-tl-lg rounded-bl-lg"><strong>Incidente</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100"><strong>Designado por</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100"><strong>Descrição</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100"><strong>Data Criado</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100"><strong>Data Designado</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100"><strong>Tempo na Fila até Designar</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100"><strong>Data Finalizado</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100"><strong>Finalizado em</strong></th>
+            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100 rounded-tr rounded-br"><strong>Status</strong></th>
           </tr>
         </thead>
         <tbody>
@@ -52,6 +54,9 @@
             <td class="px-4 py-1 text-gray-500">{{ $change->earliest_submit_date }}</td>
             <td class="px-4 py-1 text-gray-500">{{ $change->min_createdate }}</td>
             <td class="px-4 py-1 text-gray-500 text-lg">{{ $change->time_assigned }}</td>
+            <td class="px-4 py-1 text-gray-500 text-lg">{{ $change->finished_datetime }}</td>
+            <td class="px-4 py-1 text-gray-500 text-lg">{{ $change->time_finished }}</td>
+            <td class="px-4 py-1 text-gray-500 text-lg">{{ $change->status }}</td>
           </tr>
           @endforeach
         </tbody>
@@ -64,12 +69,13 @@
   </div>
 </section>
 
-
 <script>
   // Dados dos analistas e médias passados da função media()
   const analistas = @json($nomesAnalistas); // Nomes dos analistas
-  const medias = @json($medias); // Médias de time_assigned em hh:mm:ss
+  const mediasAssigned = @json($mediasAssigned); // Médias de time_assigned em hh:mm:ss
+  const mediasFinished = @json($mediasFinished);
   const incByAnalist = @json($repeticoes); // Número de incidentes por analista
+  const sameAsFinishedCount = @json($sameAsFinishedCount); // Número de incidentes por analista
 
   // Outros dados passados do index() (como 'changes')
   const changes = @json($changes);
@@ -79,7 +85,7 @@
     labels: analistas,
     datasets: [{
         label: 'Tempo Médio p/Designar (h)',
-        data: medias.map(timeToSeconds), // Converte cada tempo para segundos para o gráfico
+        data: mediasAssigned.map(timeToSeconds), // Converte cada tempo para segundos para o gráfico
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
         borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1,
@@ -94,6 +100,24 @@
         borderWidth: 2,
         fill: false, // Linha sem preenchimento abaixo
         yAxisID: 'y1', // Usa um segundo eixo Y para a escala dos incidentes
+      },
+      {
+        label: 'Incidentes por Analista', // IncByAnalist plotado em uma linha
+        data: sameAsFinishedCount, // Dados do número de incidentes
+        type: 'line', // Define o tipo de gráfico como linha
+        borderColor: 'rgba(75, 192, 192, 1)', // Cor verde sólido para a linha
+        backgroundColor: 'rgba(75, 192, 192, 0.2)', // Cor verde com transparência
+        borderWidth: 2,
+        fill: false, // Linha sem preenchimento abaixo
+        yAxisID: 'y1', // Usa um segundo eixo Y para a escala dos incidentes
+      },
+      {
+        label: 'Tempo Médio p/Designar (h)',
+        data: mediasFinished.map(timeToSeconds), // Converte cada tempo para segundos para o gráfico
+        backgroundColor: 'rgba(255, 99, 132, 0.2)', // Tom vermelho com transparência
+        borderColor: 'rgba(255, 99, 132, 1)', // Tom vermelho sólido
+        borderWidth: 1,
+        yAxisID: 'y',
       }
     ]
   };
