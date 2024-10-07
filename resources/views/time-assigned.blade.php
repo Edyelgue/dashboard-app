@@ -21,6 +21,9 @@
     </tbody>
   </table> --}}
   <div class="container mx-auto flex flex-col px-5 py-4 justify-center items-center">
+    <div class="flex flex-col text-center w-full mb-8">
+      <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-900">Desempenho por Analista</h1>
+    </div>
     <canvas id="myChart"></canvas>
   </div>
 </section>
@@ -35,11 +38,13 @@
           <tr>
             <th
               class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100 rounded-tl-lg rounded-bl-lg">
-              <strong>Incidente</strong></th>
+              <strong>Incidente</strong>
+            </th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100"><strong>Designado
                 por</strong></th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100">
-              <strong>Descrição</strong></th>
+              <strong>Descrição</strong>
+            </th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100"><strong>Data
                 Criado</strong></th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100"><strong>Data
@@ -51,7 +56,8 @@
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100"><strong>Finalizado
                 em</strong></th>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-700 bg-blue-100 rounded-tr rounded-br">
-              <strong>Status</strong></th>
+              <strong>Status</strong>
+            </th>
           </tr>
         </thead>
         <tbody>

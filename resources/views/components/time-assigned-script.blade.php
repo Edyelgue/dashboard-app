@@ -61,13 +61,13 @@
         legend: {
           display: true,
         },
-        title: {
-          display: true,
-          text: 'Desemenho por Analista N1',
-          font: {
-            size: 14
-          }
-        },
+        // title: {
+        //   display: true,
+        //   text: 'Desemenho por Analista N1',
+        //   font: {
+        //     size: 14
+        //   }
+        // },
         datalabels: {
           display: 'auto',
           clamp: true,
