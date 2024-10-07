@@ -20,11 +20,11 @@
       @endforeach
     </tbody>
   </table> --}}
-  <div class="container mx-auto flex flex-col px-5 py-4 justify-center items-center">
+  <div class="container mx-auto flex flex-col justify-center items-center lg:h-[500px] h-[700px]">
     <div class="flex flex-col text-center w-full mb-8">
       <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-900">Desempenho por Analista</h1>
     </div>
-    <canvas id="myChart"></canvas>
+      <canvas id="myChart" class="w-full h-full"></canvas>
   </div>
 </section>
 <section class="text-gray-600 body-font">
@@ -83,6 +83,5 @@
     </div>
   </div>
 </section>
-
 @include('components.time-assigned-script')
 @include('layouts.footer')

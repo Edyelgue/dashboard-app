@@ -13,41 +13,41 @@
   const data = {
     labels: analistas,
     datasets: [{
-      label: 'Tempo Médio p/Designar (h)',
-      data: mediasAssigned.map(timeToSeconds), // Converte cada tempo para segundos para o gráfico
-      backgroundColor: 'rgba(54, 162, 235, 0.2)',
-      borderColor: 'rgba(54, 162, 235, 1)',
-      borderWidth: 1,
-      yAxisID: 'y',
-    },
-    {
-      label: 'Assumido por analista', // IncByAnalist plotado em uma linha
-      data: incByAnalist, // Dados do número de incidentes
-      type: 'line', // Define o tipo de gráfico como linha
-      borderColor: 'rgba(255, 99, 132, 1)', // Cor da linha
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderWidth: 2,
-      fill: false, // Linha sem preenchimento abaixo
-      yAxisID: 'y1', // Usa um segundo eixo Y para a escala dos incidentes
-    },
-    {
-      label: 'Fechados por Analista', // IncByAnalist plotado em uma linha
-      data: sameAsFinishedCount, // Dados do número de incidentes
-      type: 'line', // Define o tipo de gráfico como linha
-      borderColor: 'rgba(75, 192, 192, 1)', // Cor verde sólido para a linha
-      backgroundColor: 'rgba(75, 192, 192, 0.2)', // Cor verde com transparência
-      borderWidth: 2,
-      fill: false, // Linha sem preenchimento abaixo
-      yAxisID: 'y1', // Usa um segundo eixo Y para a escala dos incidentes
-    },
-    {
-      label: 'Tempo Médio p/Finalização (h)',
-      data: mediasFinished.map(timeToSeconds), // Converte cada tempo para segundos para o gráfico
-      backgroundColor: 'rgba(255, 99, 132, 0.2)', // Tom vermelho com transparência
-      borderColor: 'rgba(255, 99, 132, 1)', // Tom vermelho sólido
-      borderWidth: 1,
-      yAxisID: 'y',
-    }
+        label: 'Tempo Médio p/Designar (h)',
+        data: mediasAssigned.map(timeToSeconds), // Converte cada tempo para segundos para o gráfico
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1,
+        yAxisID: 'y',
+      },
+      {
+        label: 'Assumido por analista', // IncByAnalist plotado em uma linha
+        data: incByAnalist, // Dados do número de incidentes
+        type: 'line', // Define o tipo de gráfico como linha
+        borderColor: 'rgba(255, 99, 132, 1)', // Cor da linha
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderWidth: 2,
+        fill: false, // Linha sem preenchimento abaixo
+        yAxisID: 'y1', // Usa um segundo eixo Y para a escala dos incidentes
+      },
+      {
+        label: 'Fechados por Analista', // IncByAnalist plotado em uma linha
+        data: sameAsFinishedCount, // Dados do número de incidentes
+        type: 'line', // Define o tipo de gráfico como linha
+        borderColor: 'rgba(75, 192, 192, 1)', // Cor verde sólido para a linha
+        backgroundColor: 'rgba(75, 192, 192, 0.2)', // Cor verde com transparência
+        borderWidth: 2,
+        fill: false, // Linha sem preenchimento abaixo
+        yAxisID: 'y1', // Usa um segundo eixo Y para a escala dos incidentes
+      },
+      {
+        label: 'Tempo Médio p/Finalização (h)',
+        data: mediasFinished.map(timeToSeconds), // Converte cada tempo para segundos para o gráfico
+        backgroundColor: 'rgba(255, 99, 132, 0.2)', // Tom vermelho com transparência
+        borderColor: 'rgba(255, 99, 132, 1)', // Tom vermelho sólido
+        borderWidth: 1,
+        yAxisID: 'y',
+      }
     ]
   };
 
@@ -74,7 +74,7 @@
           clip: true,
           anchor: 'end',
           align: 'end',
-          formatter: function (value, context) {
+          formatter: function(value, context) {
             // Formata o rótulo de tempo médio como hh:mm:ss e o rótulo de incidentes como inteiro
             if (context.dataset.label === 'Tempo Médio p/Designar (h)' || context.dataset.label === 'Tempo Médio p/Finalização (h)') {
               return secondsToTime(value); // Formata para hh:mm:ss
@@ -92,7 +92,7 @@
         y: {
           beginAtZero: true,
           ticks: {
-            callback: function (value) {
+            callback: function(value) {
               return secondsToTime(value); // Converte para hh:mm:ss no eixo Y das barras
             },
             stepSize: 3600 // Intervalo dos ticks do eixo Y das barras
@@ -106,8 +106,8 @@
           },
           grace: '10%',
           ticks: {
-            stepSize: 100, // Intervalo dos ticks do eixo Y da linha (incidentes)
-            callback: function (value) {
+            stepSize: 500, // Intervalo dos ticks do eixo Y da linha (incidentes)
+            callback: function(value) {
               return value; // Exibe os valores inteiros no eixo Y da linha
             }
           }
