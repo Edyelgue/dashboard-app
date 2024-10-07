@@ -7,16 +7,18 @@
             </div>
 
             <div class="w-full">
-                <h1 class="text-center text-3xl font-medium pt-2 pb-3">70%</h1>
+                <h1 class="text-center text-3xl font-medium pt-2 pb-3">
+                    {{ round(($chartData['totalFechados'] / $chartData['totalGeral']) * 100, 1) }}%
+                </h1>
             </div>
 
             <div class="w-full border-t py-1">
-                <h1 class="text-center text-xs font-normal">7000</h1>
+                <h1 class="text-center text-xs font-normal">{{$chartData['totalFechados']}}</h1>
             </div>
         </div>
 
         <div class="container mx-auto flex flex-col">
-            <canvas id="closedTicketsChart" width="330" height="295"></canvas>
+            <canvas id="closedTicketsChart" width="400" height="380"></canvas>
         </div>
     </section>
 
@@ -27,16 +29,18 @@
             </div>
 
             <div class="w-full">
-                <h1 class="text-center text-3xl font-medium pt-2 pb-3">30%</h1>
+                <h1 class="text-center text-3xl font-medium pt-2 pb-3">
+                    {{ round(($chartData['totalCancelados'] / $chartData['totalGeral']) * 100, 1)}}%
+                </h1>
             </div>
 
             <div class="w-full border-t py-1">
-                <h1 class="text-center text-xs font-normal">3000</h1>
+                <h1 class="text-center text-xs font-normal">{{$chartData['totalCancelados']}}</h1>
             </div>
         </div>
 
         <div class="container mx-auto flex flex-col">
-            <canvas id="canceledTicketsChart" width="330" height="295"></canvas>
+            <canvas id="canceledTicketsChart" width="400" height="380"></canvas>
         </div>
     </section>
 
@@ -47,28 +51,30 @@
             </div>
 
             <div class="w-full">
-                <h1 class="text-center text-3xl font-medium pt-2 pb-3">10000</h1>
+                <h1 class="text-center text-3xl font-medium pt-2 pb-3">{{$chartData['totalGeral']}}</h1>
             </div>
         </div>
 
         <div class="container mx-auto flex flex-col">
-            <canvas id="totalTicketsChart" width="330" height="295"></canvas>
+            <canvas id="totalTicketsChart" width="400" height="380"></canvas>
         </div>
     </section>
 </section>
 
-<section class="w-screen pt-16 flex flex-row justify-center items-center">
+<section class="w-screen pt-16 flex flex-row justify-center items-center mb-36">
     <section class="text-gray-600">
         <div class="container mx-auto flex flex-col">
-            <canvas id="canceldAndClosed" width="1118" height="550"></canvas>
+            <canvas id="canceldAndClosed" width="1328" height="760"></canvas>
         </div>
     </section>
 </section>
 
 <script>
     // Grafico de tickets fechados por analista
-    const chartData = {!! $chartData !!};
-    
+    const chartData = @json($chartData);
+
+    chartData.totalGeral
+
     const dataClosed = {
         labels: chartData.labels,
         datasets: [{
@@ -220,11 +226,11 @@
 
     // Grafico de total de tickets fechados e cancelados por analista
     const dataClosedAndCanceled = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: chartData.labels,
         datasets: [
             {
                 label: 'Fechados',
-                data: [12, 19, 3, 5, 2, 3],
+                data: chartData.datasets[0].data,
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 216, 235, 1)',
                 borderWidth: 1,
@@ -232,7 +238,7 @@
             },
             {
                 label: 'Cancelados',
-                data: [12, 19, 3, 5, 2, 3],
+                data: chartData.datasets[1].data,
                 backgroundColor: 'rgba(235, 162, 54, 0.2)',
                 borderColor: 'rgba(235, 162, 54, 1)',
                 borderWidth: 1,

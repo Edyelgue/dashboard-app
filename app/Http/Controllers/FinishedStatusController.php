@@ -18,6 +18,9 @@ class FinishedStatusController extends Controller
 
         $data = [];
         $analysts = [];
+        $totalGeral = 0;
+        $canceladosGeral = 0;
+        $fechadosGeral = 0;
 
         // Iterar sobre os resultados agrupados e preparar os dados para a view
         foreach ($ticketsGrouped as $analyst => $tickets) {
@@ -26,9 +29,9 @@ class FinishedStatusController extends Controller
             $totalTickets = 0;
 
             foreach ($tickets as $ticket) {
-                if ($ticket->status === 'fechado') {
+                if ($ticket->status === 'Fechado') {
                     $totalClosed = $ticket->total;
-                } elseif ($ticket->status === 'cancelado') {
+                } elseif ($ticket->status === 'Cancelado') {
                     $totalCancelled = $ticket->total;
                 }
                 // Somar todos os tickets independentemente do status
@@ -44,10 +47,17 @@ class FinishedStatusController extends Controller
             ];
 
             $analysts[] = $analyst;
+
+            $totalGeral += $totalTickets;
+            $canceladosGeral += $totalCancelled;
+            $fechadosGeral += $totalClosed;
         }
 
         $chartData = [
             'labels' => $analysts,
+            'totalGeral' => $totalGeral,
+            'totalCancelados' => $canceladosGeral,
+            'totalFechados' => $fechadosGeral,
             'datasets' => [
                 [
                     'label' => 'Tickets Fechados',
@@ -66,7 +76,7 @@ class FinishedStatusController extends Controller
 
         // Renderizar a view 'tickets-analysts' passando os dados agregados
         return $this->renderizarView('tickets-analysts', [
-            'chartData' => json_encode($chartData), // Encode para JSON
+            'chartData' => $chartData
         ]);
     }
 }
