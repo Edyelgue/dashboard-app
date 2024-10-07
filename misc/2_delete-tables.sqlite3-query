@@ -4,6 +4,9 @@
 --=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 -- database: c:\Users\edyelgue.carneiro\Documents\projetos\dashboard-app\database\database.sqlite
 
+
+DROP TABLE `table-name`;
+DROP TABLE `table-name2`;
 DROP TABLE ticket_criado;
 DROP TABLE ticket_atribuido;
 DROP TABLE ticket_finalizado;

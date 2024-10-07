@@ -34,7 +34,6 @@ class FinishedStatusDTO
                 'eduardo.rezende',
                 'jepherson.lins',
                 'pedro.santos',
-                'rafael.olima',
                 'vinicius.mareti'
             ])
             ->groupBy('finished_worklogsubmitter', 'status')

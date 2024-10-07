@@ -18,7 +18,7 @@
         </div>
 
         <div class="container mx-auto flex flex-col">
-            <canvas id="closedTicketsChart" width="400" height="380"></canvas>
+            <canvas id="closedTicketsChart" width="440" height="380"></canvas>
         </div>
     </section>
 
@@ -40,7 +40,7 @@
         </div>
 
         <div class="container mx-auto flex flex-col">
-            <canvas id="canceledTicketsChart" width="400" height="380"></canvas>
+            <canvas id="canceledTicketsChart" width="440" height="380"></canvas>
         </div>
     </section>
 
@@ -56,7 +56,7 @@
         </div>
 
         <div class="container mx-auto flex flex-col">
-            <canvas id="totalTicketsChart" width="400" height="380"></canvas>
+            <canvas id="totalTicketsChart" width="440" height="380"></canvas>
         </div>
     </section>
 </section>
