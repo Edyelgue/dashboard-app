@@ -61,6 +61,13 @@
         legend: {
           display: true,
         },
+        title: {
+          display: true,
+          text: 'Desemenho por Analista N1',
+          font: {
+            size: 14
+          }
+        },
         datalabels: {
           display: 'auto',
           clamp: true,
@@ -69,15 +76,7 @@
           align: 'end',
           formatter: function (value, context) {
             // Formata o rótulo de tempo médio como hh:mm:ss e o rótulo de incidentes como inteiro
-            if (context.dataset.label === 'Tempo Médio p/Designar (h)') {
-              return secondsToTime(value); // Formata para hh:mm:ss
-            } else {
-              return value.toFixed(0); // Formata para inteiro
-            }
-          },
-          formatter: function (value, context) {
-            // Formata o rótulo de tempo médio como hh:mm:ss e o rótulo de incidentes como inteiro
-            if (context.dataset.label === 'Tempo Médio p/Finalização (h)') {
+            if (context.dataset.label === 'Tempo Médio p/Designar (h)' || context.dataset.label === 'Tempo Médio p/Finalização (h)') {
               return secondsToTime(value); // Formata para hh:mm:ss
             } else {
               return value.toFixed(0); // Formata para inteiro
@@ -96,7 +95,7 @@
             callback: function (value) {
               return secondsToTime(value); // Converte para hh:mm:ss no eixo Y das barras
             },
-            stepSize: 1200 // Intervalo dos ticks do eixo Y das barras
+            stepSize: 3600 // Intervalo dos ticks do eixo Y das barras
           }
         },
         y1: {
