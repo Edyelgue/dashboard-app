@@ -13,12 +13,15 @@ class ChangeStatusDTO
             ->table('change_status_incident')
             ->select(
                 'worklogsubmitter',
-                'finished_worklogsubmitter', // Adicionando o campo finished_worklogsubmitter
+                'finished_worklogsubmitter',
                 'incidentid',
                 'earliest_submit_date',
                 'min_createdate',
                 'incidentsummary',
-                DB::raw('julianday(coalesce(min_createdate, 0)) - julianday(coalesce(earliest_submit_date, 0)) AS time_assigned') // Alias e cálculo corrigidos
+                'finished_datetime',
+                'status',
+                DB::raw('julianday(coalesce(min_createdate, 0)) - julianday(coalesce(earliest_submit_date, 0)) AS time_assigned'),
+                DB::raw('julianday(coalesce(finished_datetime, 0)) - julianday(coalesce(min_createdate, 0)) AS time_finished')
             )
             ->whereIn('worklogsubmitter', [
                 'edgard.araujo',
@@ -47,7 +50,6 @@ class ChangeStatusDTO
                 'finished_worklogsubmitter' // Inclui no agrupamento para evitar erros de agregação
             )
             ->orderByDesc('time_assigned')
-            // ->limit(50)
             ->get();
     }
 }
