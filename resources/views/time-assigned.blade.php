@@ -1,5 +1,12 @@
 @include('layouts.header')
-<section class="text-gray-600 body-font pt-36">
+
+<section class="w-full flex items-center justify-center pt-36">
+    <div class="container justify-center items-center text-center w-full mb-8">
+        <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-600">Tickets Fechados/Cancelados - Nivel 1</h1>
+    </div>
+</section>
+
+<section class="text-gray-600 body-font pt-8">
   {{-- <table>
     <thead>
       <tr>
@@ -21,9 +28,9 @@
     </tbody>
   </table> --}}
   <div class="container mx-auto flex flex-col px-5 py-4 justify-center items-center">
-    <div class="flex flex-col text-center w-full mb-8">
+    <!-- <div class="flex flex-col text-center w-full mb-8">
       <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-900">Desempenho por Analista</h1>
-    </div>
+    </div> -->
     <canvas id="myChart"></canvas>
   </div>
 </section>

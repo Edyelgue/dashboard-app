@@ -14,37 +14,37 @@
     labels: analistas,
     datasets: [{
       label: 'Tempo Médio p/Designar (h)',
-      data: mediasAssigned.map(timeToSeconds), // Converte cada tempo para segundos para o gráfico
-      backgroundColor: 'rgba(54, 162, 235, 0.2)',
-      borderColor: 'rgba(54, 162, 235, 1)',
+      data: mediasAssigned.map(timeToSeconds),
+      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      borderColor: 'rgba(75, 192, 192, 1)',
       borderWidth: 1,
       yAxisID: 'y',
     },
     {
-      label: 'Assumido por analista', // IncByAnalist plotado em uma linha
-      data: incByAnalist, // Dados do número de incidentes
-      type: 'line', // Define o tipo de gráfico como linha
-      borderColor: 'rgba(255, 99, 132, 1)', // Cor da linha
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      label: 'Assumido por analista',
+      data: incByAnalist,
+      type: 'line',
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgba(54, 162, 235, 1)',
       borderWidth: 2,
-      fill: false, // Linha sem preenchimento abaixo
-      yAxisID: 'y1', // Usa um segundo eixo Y para a escala dos incidentes
+      fill: false,
+      yAxisID: 'y1',
     },
     {
-      label: 'Fechados por Analista', // IncByAnalist plotado em uma linha
-      data: sameAsFinishedCount, // Dados do número de incidentes
-      type: 'line', // Define o tipo de gráfico como linha
-      borderColor: 'rgba(75, 192, 192, 1)', // Cor verde sólido para a linha
-      backgroundColor: 'rgba(75, 192, 192, 0.2)', // Cor verde com transparência
+      label: 'Fechados por Analista',
+      data: sameAsFinishedCount,
+      type: 'line',
+      backgroundColor: 'rgba(255, 206, 86, 0.2)',
+      borderColor: 'rgba(255, 206, 86, 1)',
       borderWidth: 2,
-      fill: false, // Linha sem preenchimento abaixo
-      yAxisID: 'y1', // Usa um segundo eixo Y para a escala dos incidentes
+      fill: false,
+      yAxisID: 'y1',
     },
     {
       label: 'Tempo Médio p/Finalização (h)',
-      data: mediasFinished.map(timeToSeconds), // Converte cada tempo para segundos para o gráfico
-      backgroundColor: 'rgba(255, 99, 132, 0.2)', // Tom vermelho com transparência
-      borderColor: 'rgba(255, 99, 132, 1)', // Tom vermelho sólido
+      data: mediasFinished.map(timeToSeconds),
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgba(255, 99, 132, 1)',
       borderWidth: 1,
       yAxisID: 'y',
     }
@@ -58,19 +58,29 @@
       responsive: true, // Torna o gráfico responsivo
       maintainAspectRatio: true, // Permite ajustar a proporção ao redimensionar
       plugins: {
+        tooltip: {
+          callbacks: {
+            label: function (tooltipItem) {
+              console.log(tooltipItem)
+              console.log(data)
+
+              const value = tooltipItem.raw;
+              const label = tooltipItem.dataset.label;
+
+              if (label === 'Tempo Médio p/Designar (h)' || label === 'Tempo Médio p/Finalização (h)') {
+                return label + ': ' + secondsToTime(value); // Formata para hh:mm:ss
+              } else {
+                return label + ': ' + value.toFixed(0); // Formata para inteiro
+              }
+            }
+          }
+        },
         legend: {
           display: true,
         },
-        // title: {
-        //   display: true,
-        //   text: 'Desemenho por Analista N1',
-        //   font: {
-        //     size: 14
-        //   }
-        // },
         datalabels: {
-          display: 'auto',
-          clamp: true,
+          // display: 'auto',
+          // clamp: true,
           clip: true,
           anchor: 'end',
           align: 'end',

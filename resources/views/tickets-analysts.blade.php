@@ -1,5 +1,12 @@
 @include('layouts.header')
-<section class="w-screen pt-36 flex flex-row justify-center items-center">
+
+<section class="w-full flex items-center justify-center pt-36">
+    <div class="container justify-center items-center text-center w-full mb-8">
+        <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-600">Tickets Fechados/Cancelados - Nivel 1</h1>
+    </div>
+</section>
+
+<section class="w-screen pt-8 flex flex-row justify-center items-center">
     <section class="text-gray-600 mr-16">
         <div class="container flex flex-col items-center mb-2 border rounded">
             <div class="w-full border-b py-1">
@@ -10,7 +17,7 @@
                 <h1 class="text-center text-3xl font-medium pt-2 pb-3">
                     {{ round(($chartData['totalFechados'] / $chartData['totalGeral']) * 100, 1) }}%
                 </h1>
-            </div>
+             </div>
 
             <div class="w-full border-t py-1">
                 <h1 class="text-center text-xs font-normal">{{$chartData['totalFechados']}}</h1>
