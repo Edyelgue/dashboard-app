@@ -23,8 +23,8 @@
             </svg>
           </div>
           <div class="flex-grow">
-            <h2 class="text-gray-500 title-font font-semibold"><a href="#">Vazio</a></h2>
-            <p class="text-gray-400"><a href="/time-assigned">Vazio</a></p>
+            <h2 class="text-gray-500 title-font font-semibold"><a href="/tickets-analysts">NOC Monitoramento</a></h2>
+            <p class="text-gray-400"><a href="/tickets-analysts">Relação de Tickets Fechados e Cancelados por analista</a></p>
           </div>
         </div>
       </div>

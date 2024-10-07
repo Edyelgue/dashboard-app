@@ -1,0 +1,85 @@
+-- database: c:\Users\edyelgue.carneiro\Documents\projetos\dashboard-app\database\database.sqlite
+CREATE TABLE ticket_criado AS
+SELECT
+    incidentid,
+    MIN(earliest_submit_date) AS earliest_submit_date
+FROM
+    `table-name`
+WHERE
+    dsk_gst_massiverelated = 'Não'
+GROUP BY
+    incidentid;
+
+--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+CREATE TABLE ticket_atribuido AS
+SELECT
+    incidentid,
+    MIN(min_createdate) AS min_createdate,
+    worklogsubmitter,
+    incidentsummary
+FROM
+    `table-name2`
+WHERE
+    notes LIKE '%Assigned To:%'
+GROUP BY
+    incidentid;
+
+--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+CREATE TABLE ticket_finalizado AS
+SELECT
+    incidentid,
+    worklogsubmitter AS finishedby,
+    notes,
+    min_createdate
+FROM 
+    `table-name2`
+WHERE notes LIKE '%Closed By%'
+OR notes LIKE '%Cancelled By%';
+
+--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+-- Consulta de união das tabelas
+CREATE TABLE change_status_incident AS
+SELECT
+    tc.incidentid,
+    tc.earliest_submit_date,
+    ta.min_createdate,
+    ta.worklogsubmitter AS worklogsubmitter,
+    ta.incidentsummary,
+    tf.finishedby AS finished_worklogsubmitter,
+    tf.min_createdate AS finished_datetime,
+    CASE 
+        WHEN tf.notes LIKE '%Closed By%' THEN 'Fechado'
+        WHEN tf.notes LIKE '%Cancelled By%' THEN 'Cancelado'
+        ELSE tf.notes
+    END AS notes
+FROM
+    ticket_criado tc
+LEFT JOIN
+    ticket_atribuido ta ON tc.incidentid = ta.incidentid
+LEFT JOIN
+    ticket_finalizado tf ON tc.incidentid = tf.incidentid
+WHERE
+    ta.incidentsummary NOT LIKE '%GMUD%'
+    AND ta.incidentsummary NOT LIKE '%PREVENTIVA%'
+    AND worklogsubmitter IN (
+        'edgard.araujo',
+        'marcos.jesus',
+        'samuel.fagundes',
+        'samuel.souza',
+        'evandro.pereira',
+        'camilly.psilva',
+        'jeferson.dorta',
+        'gabriel.martins',
+        'mateus.tofani',
+        'murilo.medeiros',
+        'otavio.souza',
+        'lucas.angelo',
+        'eduardo.rezende',
+        'jepherson.lins',
+        'pedro.santos',
+        'vinicius.mareti'
+    )
+    AND finished_worklogsubmitter NOT LIKE '';

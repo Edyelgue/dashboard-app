@@ -1,0 +1,13 @@
+-- database: c:\Users\edyelgue.carneiro\Documents\projetos\dashboard-app\database\database.sqlite
+--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-- ESSAS TABELAS DEVERÃO SER DELETADAS SEMPRE ANTES DE ATUALIZAR A CONSULTA:
+--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+-- database: c:\Users\edyelgue.carneiro\Documents\projetos\dashboard-app\database\database.sqlite
+
+
+DROP TABLE `table-name`;
+DROP TABLE `table-name2`;
+DROP TABLE ticket_criado;
+DROP TABLE ticket_atribuido;
+DROP TABLE ticket_finalizado;
+DROP TABLE change_status_incident;

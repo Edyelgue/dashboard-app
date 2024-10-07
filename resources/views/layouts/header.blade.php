@@ -21,10 +21,10 @@
 
             <!-- Menu de navegação para desktop -->
             <nav id="desktop-menu" class="hidden lg:flex md:ml-auto md:mr-auto flex-wrap items-center text-base justify-center w-full md:w-auto">
-                <a class="mr-5 hover:text-gray-500 text-gray-300" href="/">Incidente</a><span class="mr-5 text-gray-300 font-thin">|</span>
-                <a class="mr-5 hover:text-gray-500 text-gray-300" href="#">Solicitação de Mudança</a><span class="mr-5 text-gray-300 font-thin">|</span>
-                <a class="mr-5 hover:text-gray-500 text-gray-300" href="#">Investigação de Problema</a><span class="mr-5 text-gray-300 font-thin">|</span>
-                <a class="mr-5 hover:text-gray-500 text-gray-300" href="#">Ordem de Trabalho</a>
+                <a class="mr-5 hover:text-gray-500 text-gray-300" href="/">Incidentes</a><span class="mr-5 text-gray-300 font-thin">|</span>
+                <a class="mr-5 hover:text-gray-500 text-gray-300" href="#">Solicitação de Mudanças</a><span class="mr-5 text-gray-300 font-thin">|</span>
+                <a class="mr-5 hover:text-gray-500 text-gray-300" href="#">Investigação de Problemas</a><span class="mr-5 text-gray-300 font-thin">|</span>
+                <a class="mr-5 hover:text-gray-500 text-gray-300" href="#">Ordens de Trabalho</a>
             </nav>
 
             <!-- Ícone de hambúrguer para telas pequenas -->
