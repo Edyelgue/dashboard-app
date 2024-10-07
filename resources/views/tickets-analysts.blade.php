@@ -16,7 +16,7 @@
         </div>
 
         <div class="container mx-auto flex flex-col">
-            <canvas id="closedTicketsChart" width="330" height="275"></canvas>
+            <canvas id="closedTicketsChart" width="330" height="295"></canvas>
         </div>
     </section>
 
@@ -36,7 +36,7 @@
         </div>
 
         <div class="container mx-auto flex flex-col">
-            <canvas id="canceledTicketsChart" width="330" height="275"></canvas>
+            <canvas id="canceledTicketsChart" width="330" height="295"></canvas>
         </div>
     </section>
 
@@ -52,7 +52,7 @@
         </div>
 
         <div class="container mx-auto flex flex-col">
-            <canvas id="totalTicketsChart" width="330" height="275"></canvas>
+            <canvas id="totalTicketsChart" width="330" height="295"></canvas>
         </div>
     </section>
 </section>
@@ -67,11 +67,13 @@
 
 <script>
     // Grafico de tickets fechados por analista
+    const chartData = {!! $chartData !!};
+    
     const dataClosed = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: chartData.labels,
         datasets: [{
             label: 'Tickets Fechados',
-            data: [12, 19, 3, 5, 2, 3],
+            data: chartData.datasets[0].data,
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 216, 235, 1)',
             borderWidth: 1,
@@ -118,10 +120,10 @@
 
     // Grafico de tickets cancelados por analista
     const dataCanceled = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: chartData.labels,
         datasets: [{
             label: 'Tickets Cancelados',
-            data: [12, 19, 3, 5, 2, 3],
+            data: chartData.datasets[1].data,
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 216, 235, 1)',
             borderWidth: 1,
@@ -168,10 +170,10 @@
 
     // Grafico de total de tickets por analista
     const dataTotal = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: chartData.labels,
         datasets: [{
             label: 'Total de Tickets',
-            data: [12, 19, 3, 5, 2, 3],
+            data: chartData.datasets[2].data,
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 216, 235, 1)',
             borderWidth: 1,
