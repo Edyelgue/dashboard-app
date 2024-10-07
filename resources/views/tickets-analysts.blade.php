@@ -64,7 +64,7 @@
 <section class="w-screen pt-16 flex flex-row justify-center items-center mb-36">
     <section class="text-gray-600">
         <div class="container mx-auto flex flex-col">
-            <canvas id="canceldAndClosed" width="1328" height="760"></canvas>
+            <canvas id="canceldAndClosed" width="1200" height="760"></canvas>
         </div>
     </section>
 </section>
