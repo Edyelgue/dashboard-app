@@ -18,7 +18,7 @@
         </div>
 
         <div class="container mx-auto flex flex-col">
-            <canvas id="closedTicketsChart" width="440" height="380"></canvas>
+            <canvas id="closedTicketsChart" width="440" height="410"></canvas>
         </div>
     </section>
 
@@ -40,7 +40,7 @@
         </div>
 
         <div class="container mx-auto flex flex-col">
-            <canvas id="canceledTicketsChart" width="440" height="380"></canvas>
+            <canvas id="canceledTicketsChart" width="440" height="410"></canvas>
         </div>
     </section>
 
@@ -56,7 +56,7 @@
         </div>
 
         <div class="container mx-auto flex flex-col">
-            <canvas id="totalTicketsChart" width="440" height="380"></canvas>
+            <canvas id="totalTicketsChart" width="440" height="410"></canvas>
         </div>
     </section>
 </section>
@@ -80,8 +80,8 @@
         datasets: [{
             label: 'Tickets Fechados',
             data: chartData.datasets[0].data,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 216, 235, 1)',
+            backgroundColor: 'rgba(235, 181, 30, 0.2)',
+            borderColor: 'rgba(235, 181, 30, 1)',
             borderWidth: 1,
             yAxisID: 'y'
         }]
@@ -99,7 +99,8 @@
                 },
                 datalabels: {
                     anchor: 'end',
-                    alin: 'end',
+                    align: 'end',
+                    offset: '2',
                     color: '#666666',
                     font: {
                         weight: 'regular'
@@ -112,7 +113,8 @@
             },
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    grace: '10%'
                 }
             }
         },
@@ -130,8 +132,8 @@
         datasets: [{
             label: 'Tickets Cancelados',
             data: chartData.datasets[1].data,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 216, 235, 1)',
+            backgroundColor: 'rgba(235, 181, 30, 0.2)',
+            borderColor: 'rgba(235, 181, 30, 1)',
             borderWidth: 1,
             yAxisID: 'y'
         }]
@@ -149,7 +151,8 @@
                 },
                 datalabels: {
                     anchor: 'end',
-                    alin: 'end',
+                    align: 'end',
+                    offset: '2',
                     color: '#666666',
                     font: {
                         weight: 'regular'
@@ -162,7 +165,8 @@
             },
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    grace: '10%'
                 }
             }
         },
@@ -180,8 +184,8 @@
         datasets: [{
             label: 'Total de Tickets',
             data: chartData.datasets[2].data,
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 216, 235, 1)',
+            backgroundColor: 'rgba(235, 181, 30, 0.2)',
+            borderColor: 'rgba(235, 181, 30, 1)',
             borderWidth: 1,
             yAxisID: 'y'
         }]
@@ -193,13 +197,17 @@
         options: {
             responsive: true,
             maintainAspectRatio: true,
+
             plugins: {
                 legend: {
                     display: true
                 },
                 datalabels: {
+                    clamp: true,
+                    clip: true,
                     anchor: 'end',
-                    alin: 'end',
+                    align: 'end',
+                    offset: '1',
                     color: '#666666',
                     font: {
                         weight: 'regular'
@@ -212,7 +220,8 @@
             },
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    grace: '10%'
                 }
             }
         },
@@ -231,16 +240,16 @@
             {
                 label: 'Fechados',
                 data: chartData.datasets[0].data,
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 216, 235, 1)',
+                backgroundColor: 'rgba(235, 181, 30, 0.2)',
+                borderColor: 'rgba(235, 181, 30, 1)',
                 borderWidth: 1,
                 yAxisID: 'y'
             },
             {
                 label: 'Cancelados',
                 data: chartData.datasets[1].data,
-                backgroundColor: 'rgba(235, 162, 54, 0.2)',
-                borderColor: 'rgba(235, 162, 54, 1)',
+                backgroundColor: 'rgba(172,36,7, 0.2)',
+                borderColor: 'rgba(172,36,7, 1)',
                 borderWidth: 1,
                 yAxisID: 'y'
             },
@@ -259,7 +268,8 @@
                 },
                 datalabels: {
                     anchor: 'end',
-                    alin: 'end',
+                    align: 'end',
+                    offset: '2',
                     color: '#666666',
                     font: {
                         weight: 'regular'
@@ -272,7 +282,8 @@
             },
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    grace: '10%'
                 }
             }
         },
