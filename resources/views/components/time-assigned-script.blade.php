@@ -84,7 +84,7 @@
           clip: true,
           anchor: 'end',
           align: 'end',
-          formatter: function (value, context) {
+          formatter: function(value, context) {
             // Formata o rótulo de tempo médio como hh:mm:ss e o rótulo de incidentes como inteiro
             if (context.dataset.label === 'Tempo Médio p/Designar (h)' || context.dataset.label === 'Tempo Médio p/Finalização (h)') {
               return secondsToTime(value); // Formata para hh:mm:ss
@@ -102,7 +102,7 @@
         y: {
           beginAtZero: true,
           ticks: {
-            callback: function (value) {
+            callback: function(value) {
               return secondsToTime(value); // Converte para hh:mm:ss no eixo Y das barras
             },
             stepSize: 3600 // Intervalo dos ticks do eixo Y das barras
@@ -116,8 +116,8 @@
           },
           grace: '10%',
           ticks: {
-            stepSize: 100, // Intervalo dos ticks do eixo Y da linha (incidentes)
-            callback: function (value) {
+            stepSize: 500, // Intervalo dos ticks do eixo Y da linha (incidentes)
+            callback: function(value) {
               return value; // Exibe os valores inteiros no eixo Y da linha
             }
           }

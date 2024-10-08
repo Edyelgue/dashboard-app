@@ -90,6 +90,5 @@
     </div>
   </div>
 </section>
-
 @include('components.time-assigned-script')
 @include('layouts.footer')
