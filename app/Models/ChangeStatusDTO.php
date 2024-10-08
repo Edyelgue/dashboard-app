@@ -43,7 +43,7 @@ class ChangeStatusDTO
                 'vinicius.mareti'
             ])
             ->where('incidentsummary', 'not like', '%GMUD%') // Exclui registros com 'GMUD' no incidentid
-            ->whereDate('min_createdate', '>=', Carbon::now()->subDays(30)) // Filtra registros dos últimos 7 dias
+            ->whereDate('min_createdate', '>=', Carbon::now()->subDays(7)) // Filtra registros dos últimos 7 dias
             ->groupBy(
                 'incidentid',
                 'worklogsubmitter',
