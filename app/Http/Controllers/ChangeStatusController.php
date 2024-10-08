@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ChangeStatusDTO;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Request;
 
 class ChangeStatusController extends Controller
 {
@@ -16,6 +17,16 @@ class ChangeStatusController extends Controller
     public function index()
     {
         $perPage = 20;
+
+        // Verifique se já existe um cache dos dados na sessão
+        if (!session()->has('changesCollection')) {
+            // Se não houver, obtenha os dados e armazene na sessão
+            $changesCollection = collect(ChangeStatusDTO::listar());
+            session(['changesCollection' => $changesCollection]);
+        } else {
+            // Caso os dados já estejam na sessão, apenas os recupere
+            $changesCollection = session('changesCollection');
+        }
 
         // Obter a lista de changes
         $changesCollection = collect(ChangeStatusDTO::listar());
@@ -60,6 +71,65 @@ class ChangeStatusController extends Controller
         return $this->renderizarView('time-assigned', array_merge(['changes' => $paginatedChanges], $mediaData));
     }
 
+    // Método de busca
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('query'); // Obter termo de busca
+        $perPage = 20;
+    
+        // Recuperar dados da sessão
+        $changesCollection = session('changesCollection', collect());
+    
+        // Filtrar os dados com base no termo de busca
+        $filteredChanges = $changesCollection->filter(function ($change) use ($searchTerm) {
+            // Converter o status para começar com letra maiúscula
+            $statusFormatted = ucfirst($change->status); // Converte a primeira letra para maiúscula
+    
+            return stripos($change->incidentsummary, $searchTerm) !== false ||
+                stripos($change->incidentid, $searchTerm) !== false ||
+                stripos($statusFormatted, $searchTerm) !== false || // Usa stripos para busca no status
+                stripos($change->worklogsubmitter, $searchTerm) !== false;
+        });
+    
+        // Paginação
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $changes = $filteredChanges->slice(($currentPage - 1) * $perPage, $perPage)->all();
+    
+        // Formatação dos campos time_assigned e time_finished
+        foreach ($changes as $change) {
+            $change->earliest_submit_date = Carbon::parse($change->earliest_submit_date)->format('d/m/Y H:i:s');
+            $change->min_createdate = Carbon::parse($change->min_createdate)->format('d/m/Y H:i:s');
+            $change->finished_datetime = Carbon::parse($change->finished_datetime)->format('d/m/Y H:i:s');
+
+            // Formatando o campo time_assigned (em dias) para HH:MM:SS
+            $totalSecondsAssigned = $change->time_assigned * 24 * 60 * 60;
+            $hoursAssigned = floor($totalSecondsAssigned / 3600);
+            $minutesAssigned = floor(($totalSecondsAssigned % 3600) / 60);
+            $secondsAssigned = $totalSecondsAssigned % 60;
+            $change->time_assigned = sprintf('%02d:%02d:%02d', $hoursAssigned, $minutesAssigned, $secondsAssigned);
+
+            // Formatando o campo time_finished (em dias) para HH:MM:SS
+            if (isset($change->time_finished)) {
+                $totalSecondsFinished = $change->time_finished * 24 * 60 * 60;
+                $hoursFinished = floor($totalSecondsFinished / 3600);
+                $minutesFinished = floor(($totalSecondsFinished % 3600) / 60);
+                $secondsFinished = $totalSecondsFinished % 60;
+                $change->time_finished = sprintf('%02d:%02d:%02d', $hoursFinished, $minutesFinished, $secondsFinished);
+            }
+        }
+    
+        $paginatedChanges = new LengthAwarePaginator(
+            $changes,
+            $filteredChanges->count(),
+            $perPage,
+            $currentPage,
+            ['path' => LengthAwarePaginator::resolveCurrentPath()]
+        );
+    
+        // Retornar view parcial com os resultados filtrados
+        return view('partials.changes-tbody', ['changes' => $paginatedChanges]);
+    }
+    
     public function media()
     {
         // Chamando o método listar()

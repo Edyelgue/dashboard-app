@@ -21,3 +21,6 @@ Route::get('/time-assigned', [ChangeStatusController::class, 'index'])
 
 Route::get('/tickets-analysts', [FinishedStatusController::class, 'index'])
 ->name('tickets-analysts.index');
+
+Route::get('/time-assigned', [ChangeStatusController::class, 'index'])->name('time-assigned');
+Route::get('/time-assigned/search', [ChangeStatusController::class, 'search'])->name('time-assigned.search');
