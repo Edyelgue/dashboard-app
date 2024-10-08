@@ -1,6 +1,7 @@
 @include('layouts.header')
-<section class="text-gray-600 body-font flex h-full pt-36">
+<section class="text-gray-600 body-font flex h-full">
   <div class="container px-5 py-24 mx-auto">
+    <h1 class="sm:text-4xl text-3xl font-bold title-font text-center align-center mb-2 text-gray-600 pb-[24px]">Métricas NOC Incidentes</h1>
     <div class="flex flex-wrap -m-2">
       <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
         <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
