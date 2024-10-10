@@ -1,6 +1,6 @@
 @include('layouts.header')
 
-<section class="w-full flex items-center justify-center pt-[104px]">
+<section class="w-full flex items-center justify-center pt-36">
     <div class="container justify-center items-center text-center w-full mb-8">
         <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-600">Tickets Fechados/Cancelados - Nivel 1</h1>
     </div>
