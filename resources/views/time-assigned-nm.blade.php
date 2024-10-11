@@ -1,7 +1,7 @@
 @include('layouts.header')
 <section class="text-gray-600 body-font pt-[104px]">
   <div class="container mx-auto flex flex-col px-5 py-2 justify-center items-center">
-    <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-600">Desempenho por Analista - N1</h1>
+    <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-600">Desempenho por Analista - N0</h1>
     <canvas id="myChart" class="h-full w-full pt-[24px]"></canvas>
   </div>
 </section>
@@ -58,7 +58,7 @@
       let query = this.value;
 
       // Fazer a requisição AJAX
-      fetch(`/time-assigned/search?query=${query}`)
+      fetch(`/time-assigned-nm/search?query=${query}`)
         .then(response => response.text())
         .then(html => {
           document.getElementById('changes-tbody').innerHTML = html;
@@ -66,5 +66,5 @@
     });
   </script>
 </section>
-@include('components.time-assigned-script')
+@include('components.time-assigned-script-nm')
 @include('layouts.footer')

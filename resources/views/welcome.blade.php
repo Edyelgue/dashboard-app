@@ -1,6 +1,7 @@
 @include('layouts.header')
-<section class="text-gray-600 body-font flex h-full pt-36">
+<section class="text-gray-600 body-font flex h-full">
   <div class="container px-5 py-24 mx-auto">
+    <h1 class="sm:text-4xl text-3xl font-bold title-font text-center align-center mb-2 text-gray-600 pb-[24px]">Métricas NOC Incidentes</h1>
     <div class="flex flex-wrap -m-2">
       <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
         <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
@@ -11,7 +12,7 @@
           </div>
           <div class="flex-grow">
             <h2 class="text-gray-500 title-font font-semibold"><a href="/time-assigned">NOC Incidentes</a></h2>
-            <p class="text-gray-400"><a href="/time-assigned">Tempo Médio de Ticket na Fila</a></p>
+            <p class="text-gray-400"><a href="/time-assigned">Tempo Médio de Ticket na Fila - N1</a></p>
           </div>
         </div>
       </div>
@@ -23,8 +24,8 @@
             </svg>
           </div>
           <div class="flex-grow">
-            <h2 class="text-gray-500 title-font font-semibold"><a href="/tickets-analysts">NOC Monitoramento</a></h2>
-            <p class="text-gray-400"><a href="/tickets-analysts">Relação de Tickets Fechados e Cancelados por analista</a></p>
+            <h2 class="text-gray-500 title-font font-semibold"><a href="/time-assigned-nm">NOC Monitoramento</a></h2>
+            <p class="text-gray-400"><a href="/time-assigned-nm">Tempo Médio de Ticket na Fila - N0</a></p>
           </div>
         </div>
       </div>
@@ -36,8 +37,8 @@
             </svg>
           </div>
           <div class="flex-grow">
-            <h2 class="text-gray-500 title-font font-semibold"><a href="#">Vazio</a></h2>
-            <p class="text-gray-500">Vazio</p>
+            <h2 class="text-gray-500 title-font font-semibold"><a href="/tickets-analysts">NOC Incidentes</a></h2>
+            <p class="text-gray-400"><a href="/tickets-analysts">Relação de Tickets Fechados e Cancelados por Analista - N1</a></p>
           </div>
         </div>
       </div>
