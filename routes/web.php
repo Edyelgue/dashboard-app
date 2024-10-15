@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChangeStatusController;
 use App\Http\Controllers\ChangeStatusNMController;
 use App\Http\Controllers\FinishedStatusController;
+use App\Http\Controllers\FinishedStatusNMController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,6 +23,9 @@ Route::get('/time-assigned', [ChangeStatusController::class, 'index'])
 
 Route::get('/tickets-analysts', [FinishedStatusController::class, 'index'])
 ->name('tickets-analysts.index');
+
+Route::get('/tickets-analysts-nm', [FinishedStatusNMController::class, 'index'])
+->name('tickets-analysts-nm.index');
 
 Route::get('/time-assigned', [ChangeStatusController::class, 'index'])
 ->name('time-assigned');
