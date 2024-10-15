@@ -79,8 +79,8 @@
           display: true,
         },
         datalabels: {
-          // display: 'auto',
-          // clamp: true,
+          display: 'auto',
+          clamp: true,
           clip: true,
           anchor: 'end',
           align: 'end',
@@ -101,6 +101,7 @@
       scales: {
         y: {
           beginAtZero: true,
+          grace:'10%',
           ticks: {
             callback: function(value) {
               return secondsToTime(value); // Converte para hh:mm:ss no eixo Y das barras
