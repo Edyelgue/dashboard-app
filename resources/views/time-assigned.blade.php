@@ -1,13 +1,13 @@
 @include('layouts.header')
-<section class="text-gray-600 body-font pt-[104px]">
+<section class="text-gray-600 body-font pt-[90px]">
   <div class="container mx-auto flex flex-col px-5 py-2 justify-center items-center rounded-lg text-gray-100 w-2/3" data-theme="dark">
     <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-300">Desempenho por Analista - N1</h1>
-    <canvas id="myChart" class="h-full w-full pt-[24px]"></canvas>
+    <canvas id="myChart" class="h-full w-full pt-[12px]"></canvas>
   </div>
 </section>
 <section class="text-gray-600 body-font">
   <div class="container px-1 py-[48px] mx-auto">
-    <div class="flex flex-col text-center w-full mb-[24px]">
+    <div class="flex flex-col text-center w-full mb-[12px]">
       <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-600">Incidentes</h1>
     </div>
     <div id="changes-list" class="w-full mx-auto overflow-auto">

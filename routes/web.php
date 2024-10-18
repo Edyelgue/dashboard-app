@@ -18,17 +18,22 @@ Route::get('/tickets-analysts', function () {
     return view('tickets-analysts');
 });
 
-Route::get('/time-assigned', [ChangeStatusController::class, 'index'])
-->name('time-assigned.index');
+Route::get('/time-assigned', [
+    ChangeStatusController::class, 'index'
+])->name('time-assigned.index');
 
-Route::get('/tickets-analysts', [FinishedStatusController::class, 'index'])
-->name('tickets-analysts.index');
+Route::get('/tickets-analysts', [
+    FinishedStatusController::class, 'index'
+])->name('tickets-analysts.index');
 
-Route::get('/tickets-analysts-nm', [FinishedStatusNMController::class, 'index'])
-->name('tickets-analysts-nm.index');
+Route::get('/tickets-analysts-nm', [
+    FinishedStatusNMController::class, 'index'
+])->name('tickets-analysts-nm.index');
 
-Route::get('/time-assigned', [ChangeStatusController::class, 'index'])
-->name('time-assigned');
+Route::get('/time-assigned', [
+    ChangeStatusController::class, 'index'
+])->name('time-assigned');
 
-Route::get('/time-assigned-nm', [ChangeStatusNMController::class, 'index'])
-->name('time-assigned-nm');
+Route::get('/time-assigned-nm', [
+    ChangeStatusNMController::class, 'index'
+])->name('time-assigned-nm');

@@ -15,7 +15,7 @@ class ChangeStatusController extends Controller
 
     public function index()
     {
-        $perPage = 20;
+        $perPage = 100;
 
         // Obter a lista de changes
         $changesCollection = collect(ChangeStatusDTO::listar());

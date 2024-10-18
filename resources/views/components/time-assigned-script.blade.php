@@ -106,15 +106,15 @@
       },
       scales: {
         x: {
-            ticks: {
-                color: '#c1c6cc' // Cor das labels no eixo X
-            }
-        },
-        y: {
-          beginAtZero: true,
-          grace:'10%',
           ticks: {
-            callback: function(value) {
+                color: '#c1c6cc' // Cor das labels no eixo X
+              }
+            },
+            y: {
+              beginAtZero: true,
+              grace:'10%',
+              ticks: {
+                callback: function(value) {
               return secondsToTime(value); // Converte para hh:mm:ss no eixo Y das barras
             },
             stepSize: 3600, // Intervalo dos ticks do eixo Y das barras

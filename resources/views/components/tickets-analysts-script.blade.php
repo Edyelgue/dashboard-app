@@ -27,6 +27,9 @@
                     display: true
                 },
                 datalabels: {
+                    display: 'auto',
+                    clamp: true,
+                    clip: true,
                     anchor: 'end',
                     align: 'end',
                     offset: '2',
@@ -79,6 +82,9 @@
                     display: true
                 },
                 datalabels: {
+                    display: 'auto',
+                    clamp: true,
+                    clip: true,
                     anchor: 'end',
                     align: 'end',
                     offset: '2',
@@ -132,6 +138,7 @@
                     display: true
                 },
                 datalabels: {
+                    display: 'auto',
                     clamp: true,
                     clip: true,
                     anchor: 'end',
@@ -165,8 +172,7 @@
     // Grafico de total de tickets fechados e cancelados por analista
     const dataClosedAndCanceled = {
         labels: chartData.labels,
-        datasets: [
-            {
+        datasets: [{
                 label: 'Fechados',
                 data: chartData.datasets[0].data,
                 backgroundColor: 'rgba(235, 181, 30, 0.2)',
@@ -196,6 +202,9 @@
                     display: true
                 },
                 datalabels: {
+                    display: 'auto',
+                    clamp: true,
+                    clip: true,
                     anchor: 'end',
                     align: 'end',
                     offset: '2',
