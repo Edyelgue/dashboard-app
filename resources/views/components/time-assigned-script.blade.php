@@ -13,41 +13,41 @@
   const data = {
     labels: analistas,
     datasets: [{
-      label: 'Tempo Médio p/Designar (h)',
-      data: mediasAssigned.map(timeToSeconds),
-      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-      borderColor: 'rgba(75, 192, 192, 1)',
-      borderWidth: 1,
-      yAxisID: 'y',
-    },
-    {
-      label: 'Assumido por analista',
-      data: incByAnalist,
-      type: 'line',
-      backgroundColor: 'rgba(54, 162, 235, 0.2)',
-      borderColor: 'rgba(54, 162, 235, 1)',
-      borderWidth: 2,
-      fill: false,
-      yAxisID: 'y1',
-    },
-    {
-      label: 'Fechados por Analista',
-      data: sameAsFinishedCount,
-      type: 'line',
-      backgroundColor: 'rgba(255, 206, 86, 0.2)',
-      borderColor: 'rgba(255, 206, 86, 1)',
-      borderWidth: 2,
-      fill: false,
-      yAxisID: 'y1',
-    },
-    {
-      label: 'Tempo Médio p/Finalização (h)',
-      data: mediasFinished.map(timeToSeconds),
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderColor: 'rgba(255, 99, 132, 1)',
-      borderWidth: 1,
-      yAxisID: 'y',
-    }
+        label: 'Tempo Médio p/Designar (h)',
+        data: mediasAssigned.map(timeToSeconds),
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+        yAxisID: 'y',
+      },
+      {
+        label: 'Assumido por analista',
+        data: incByAnalist,
+        type: 'line',
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 2,
+        fill: false,
+        yAxisID: 'y1',
+      },
+      {
+        label: 'Fechados por Analista',
+        data: sameAsFinishedCount,
+        type: 'line',
+        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+        borderColor: 'rgba(255, 206, 86, 1)',
+        borderWidth: 2,
+        fill: false,
+        yAxisID: 'y1',
+      },
+      {
+        label: 'Tempo Médio p/Finalização (h)',
+        data: mediasFinished.map(timeToSeconds),
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1,
+        yAxisID: 'y',
+      }
     ]
   };
 
@@ -56,7 +56,7 @@
     data: data,
     options: {
       font: {
-        color: '#FF0000', // Cor global para todas as fontes
+        // color: '#FF0000', // Cor global para todas as fontes
       },
       responsive: true, // Torna o gráfico responsivo
       maintainAspectRatio: true, // Permite ajustar a proporção ao redimensionar
@@ -80,7 +80,7 @@
         },
         legend: {
           labels: {
-            color: '#c1c6cc', // Cor da fonte da legenda
+            // color: '#c1c6cc', // Cor da fonte da legenda
           },
           display: true
         },
@@ -98,7 +98,7 @@
               return value.toFixed(0); // Formata para inteiro
             }
           },
-          color: '#c1c6cc', // Cor dos rotulos de barra
+          // color: '#c1c6cc', // Cor dos rotulos de barra
           font: {
             weight: 'regular'
           }
@@ -107,30 +107,40 @@
       scales: {
         x: {
           ticks: {
-                color: '#c1c6cc' // Cor das labels no eixo X
-              }
-            },
-            y: {
-              beginAtZero: true,
-              grace:'10%',
-              ticks: {
-                callback: function(value) {
+            // color: '#c1c6cc' // Cor das labels no eixo X
+          },
+          // grid: {
+          //   color: '#c1c6cc', // Cor da grade no eixo X
+          // }
+        },
+        y: {
+          // grid: {
+          //   color: '#c1c6cc', // Cor da grade no eixo Y
+          // },
+          beginAtZero: true,
+          grace: '10%',
+          ticks: {
+            callback: function(value) {
               return secondsToTime(value); // Converte para hh:mm:ss no eixo Y das barras
             },
             stepSize: 3600, // Intervalo dos ticks do eixo Y das barras
-            color: '#c1c6cc'// Cor das labels no eixo y
+            // color: '#c1c6cc' // Cor das labels no eixo y
           }
         },
         y1: {
-          beginAtZero: true,
-          position: 'right', // Posiciona o segundo eixo Y à direita
           grid: {
             drawOnChartArea: false, // Evita que a grade do y1 interfira no y
+            // color: '#0000FF', // Cor da grade no eixo Y1 (caso o `drawOnChartArea` seja `true`)
           },
+          beginAtZero: true,
+          position: 'right', // Posiciona o segundo eixo Y à direita
+          // grid: {
+          //   drawOnChartArea: false, // Evita que a grade do y1 interfira no y
+          // },
           grace: '10%',
           ticks: {
             stepSize: 500, // Intervalo dos ticks do eixo Y da linha (incidentes)
-            color: '#c1c6cc', // Cor das labels no eixo y
+            // color: '#c1c6cc', // Cor das labels no eixo y
             callback: function(value) {
               return value; // Exibe os valores inteiros no eixo Y da linha
             }
@@ -145,7 +155,7 @@
   const myChart = new Chart(
     document.getElementById('myChart'),
     config
-    );
+  );
 
   // Converte hh:mm:ss para segundos
   function timeToSeconds(time) {
