@@ -15,6 +15,17 @@
         <table class="table table-xs">
           <thead>
             <tr>
+              <th><input type="text" placeholder="Incidente" class="font-normal text-sm rounded-md w-full border"></th>
+              <th><input type="text" placeholder="Designado por" class="font-normal text-sm rounded-md w-full border"></th>
+              <th><input type="text" placeholder="Descrição" class="font-normal text-sm rounded-md w-full border"></th>
+              <th><input type="text" placeholder="Data criado" class="font-normal text-sm rounded-md w-full border"></th>
+              <th><input type="text" placeholder="Data designado" class="font-normal text-sm rounded-md w-full border"></th>
+              <th><input type="text" placeholder="Tempo na fila" class="font-normal text-sm rounded-md w-full border"></th>
+              <th><input type="text" placeholder="Data finalizado" class="font-normal text-sm rounded-md w-full border"></th>
+              <th><input type="text" placeholder="Finalizado em" class="font-normal text-sm rounded-md w-full border"></th>
+              <th><input type="text" placeholder="Status" class="font-normal text-sm rounded-md w-full border"></th>
+            </tr>
+            <tr>
               <th>Incidente</th>
               <th>Designado por</th>
               <th>Descrição</th>
