@@ -23,6 +23,9 @@ class ChangeStatusController extends Controller
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $changes = $changesCollection->slice(($currentPage - 1) * $perPage, $perPage)->all();
         // @change TValue $change
+        /**
+         * @var object $change
+         */
         foreach ($changes as $change) {
             $change->earliest_submit_date = Carbon::parse($change->earliest_submit_date)->format('d/m/Y H:i:s');
             $change->min_createdate = Carbon::parse($change->min_createdate)->format('d/m/Y H:i:s');
