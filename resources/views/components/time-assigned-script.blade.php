@@ -15,17 +15,17 @@
     datasets: [{
         label: 'Tempo Médio p/Designar (h)',
         data: mediasAssigned.map(timeToSeconds),
-        backgroundColor: 'rgba(75, 192, 192, 0.5)',
-        borderColor: 'rgba(75, 192, 192, 0.5)',
-        borderWidth: 1,
+        backgroundColor: '#F2BB0580',
+        // borderColor: '#F2BB0580',
+        // borderWidth: 1,
         yAxisID: 'y',
       },
       {
         label: 'Assumido por analista',
         data: incByAnalist,
         type: 'line',
-        backgroundColor: 'rgb(47, 48, 97)',
-        borderColor: 'rgb(47, 48, 97)',
+        backgroundColor: '#84a9c0',
+        borderColor: '#84a9c0',
         borderWidth: 2,
         fill: false,
         yAxisID: 'y1',
@@ -43,9 +43,9 @@
       {
         label: 'Tempo Médio p/Finalização (h)',
         data: mediasFinished.map(timeToSeconds),
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        borderColor: 'rgba(255, 99, 132, 0.5)',
-        borderWidth: 1,
+        backgroundColor: '#ac050680',
+        // borderColor: '#6e0e0a80',
+        // borderWidth: 1,
         yAxisID: 'y',
       }
     ]

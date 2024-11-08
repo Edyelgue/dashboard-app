@@ -16,7 +16,7 @@
                 <h1 class="text-center text-3xl font-medium pt-2 pb-3">
                     {{ round(($chartData['totalFechados'] / $chartData['totalGeral']) * 100, 1) }}%
                 </h1>
-             </div>
+            </div>
 
             <div class="w-full border-t py-1">
                 <h1 class="text-center text-xs font-normal">{{$chartData['totalFechados']}}</h1>
