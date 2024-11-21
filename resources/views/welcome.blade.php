@@ -55,7 +55,7 @@
           </div>
         </div>
       </div>
-      <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+      <!-- <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
         <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
           <div class="w-16 h-16 flex items-center justify-center rounded-full mr-4">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -120,7 +120,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </section>
 @include('layouts.footer')

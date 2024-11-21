@@ -15,17 +15,10 @@ class ChangeStatusController extends Controller
 
     public function index()
     {
-        $perPage = 100;
-
         // Obter a lista de changes
-        $changesCollection = collect(ChangeStatusDTO::listar());
+        $changes = ChangeStatusDTO::listar();
 
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $changes = $changesCollection->slice(($currentPage - 1) * $perPage, $perPage)->all();
-        // @change TValue $change
-        /**
-         * @var object $change
-         */
+        // Formatar os campos conforme necessário
         foreach ($changes as $change) {
             $change->earliest_submit_date = Carbon::parse($change->earliest_submit_date)->format('d/m/Y H:i:s');
             $change->min_createdate = Carbon::parse($change->min_createdate)->format('d/m/Y H:i:s');
@@ -48,20 +41,13 @@ class ChangeStatusController extends Controller
             }
         }
 
-        $paginatedChanges = new LengthAwarePaginator(
-            $changes,
-            $changesCollection->count(),
-            $perPage,
-            $currentPage,
-            ['path' => LengthAwarePaginator::resolveCurrentPath()]
-        );
-
         // Obter os dados de média e as contagens
         $mediaData = $this->media();
 
         // Passando os dados para a view
-        return $this->renderizarView('time-assigned', array_merge(['changes' => $paginatedChanges], $mediaData));
+        return $this->renderizarView('time-assigned', array_merge(['changes' => $changes], $mediaData));
     }
+
 
     public function media()
     {

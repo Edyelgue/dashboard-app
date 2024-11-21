@@ -61,22 +61,34 @@ class FinishedStatusController extends Controller
             'datasets' => [
                 [
                     'label' => 'Tickets Fechados',
-                    'data' => array_column($data, 'total_closed'),
+                    'data' => array_column(
+                        $data,
+                        'total_closed'
+                    ),
                 ],
                 [
                     'label' => 'Tickets Cancelados',
-                    'data' => array_column($data, 'total_cancelled'),
+                    'data' => array_column(
+                        $data,
+                        'total_cancelled'
+                    ),
                 ],
                 [
                     'label' => 'Total de Tickets',
-                    'data' => array_column($data, 'total_tickets'),
+                    'data' => array_column(
+                        $data,
+                        'total_tickets'
+                    ),
                 ],
             ],
         ];
 
         // Renderizar a view 'tickets-analysts' passando os dados agregados
-        return $this->renderizarView('tickets-analysts', [
-            'chartData' => $chartData
-        ]);
+        return $this->renderizarView(
+            'tickets-analysts',
+            [
+                'chartData' => $chartData
+            ]
+        );
     }
 }
