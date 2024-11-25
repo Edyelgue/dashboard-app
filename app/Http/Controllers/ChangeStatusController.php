@@ -16,11 +16,17 @@ class ChangeStatusController extends Controller
     public function index(Request $request)
     {
         // Capturando os filtros de data
-        $startDate = $request->input('startDate');
-        $endDate = $request->input('endDate');
+        $startDate = $request->has('startDate')
+            ? Carbon::parse($request->input('startDate'))->format('Y-m-d')
+            : null;
+
+        $endDate = $request->has('endDate')
+            ? Carbon::parse($request->input('endDate'))->format('Y-m-d')
+            : null;
 
         // Obter a lista de changes com os filtros
         $changes = ChangeStatusDTO::listar($startDate, $endDate);
+        // $changes = ChangeStatusDTO::listar('2024-10-01', '2024-10-06');
 
         // Formatar os campos conforme necessário
         foreach ($changes as $change) {

@@ -52,7 +52,7 @@ class ChangeStatusDTO
         if ($endDate) {
             $query->whereDate('earliest_submit_date', '<=', $endDate);
         }
-
+        
         return $query
             ->groupBy(
                 'incidentid',
@@ -61,5 +61,6 @@ class ChangeStatusDTO
             )
             ->orderByDesc('time_assigned')
             ->get();
+
     }
 }
