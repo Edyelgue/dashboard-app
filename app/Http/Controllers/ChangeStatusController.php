@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ChangeStatusDTO;
 use Carbon\Carbon;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Request;
 
 class ChangeStatusController extends Controller
 {
@@ -13,10 +13,14 @@ class ChangeStatusController extends Controller
         return view($view, $data);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        // Obter a lista de changes
-        $changes = ChangeStatusDTO::listar();
+        // Capturando os filtros de data
+        $startDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+
+        // Obter a lista de changes com os filtros
+        $changes = ChangeStatusDTO::listar($startDate, $endDate);
 
         // Formatar os campos conforme necessário
         foreach ($changes as $change) {
@@ -24,34 +28,23 @@ class ChangeStatusController extends Controller
             $change->min_createdate = Carbon::parse($change->min_createdate)->format('d/m/Y H:i:s');
             $change->finished_datetime = Carbon::parse($change->finished_datetime)->format('d/m/Y H:i:s');
 
-            // Formatando o campo time_assigned (em dias) para HH:MM:SS
-            $totalSecondsAssigned = $change->time_assigned * 24 * 60 * 60;
-            $hoursAssigned = floor($totalSecondsAssigned / 3600);
-            $minutesAssigned = floor(($totalSecondsAssigned % 3600) / 60);
-            $secondsAssigned = $totalSecondsAssigned % 60;
-            $change->time_assigned = sprintf('%02d:%02d:%02d', $hoursAssigned, $minutesAssigned, $secondsAssigned);
-
-            // Formatando o campo time_finished (em dias) para HH:MM:SS
+            // Convertendo os tempos de dias para HH:MM:SS
+            $change->time_assigned = gmdate('H:i:s', $change->time_assigned * 24 * 60 * 60);
             if (isset($change->time_finished)) {
-                $totalSecondsFinished = $change->time_finished * 24 * 60 * 60;
-                $hoursFinished = floor($totalSecondsFinished / 3600);
-                $minutesFinished = floor(($totalSecondsFinished % 3600) / 60);
-                $secondsFinished = $totalSecondsFinished % 60;
-                $change->time_finished = sprintf('%02d:%02d:%02d', $hoursFinished, $minutesFinished, $secondsFinished);
+                $change->time_finished = gmdate('H:i:s', $change->time_finished * 24 * 60 * 60);
             }
         }
 
-        // Obter os dados de média e as contagens
+        // Obter os dados de média e as contagens (se aplicável)
         $mediaData = $this->media();
 
-        // Passando os dados para a view
+        // Renderizar a view com os dados
         return $this->renderizarView('time-assigned', array_merge(['changes' => $changes], $mediaData));
     }
 
-
     public function media()
     {
-        // Chamando o método listar()
+        // Chamando o metodo listar()
         $changes = ChangeStatusDTO::listar();
 
         // Inicializando array para agrupar os tempos e a contagem por analista
@@ -117,13 +110,23 @@ class ChangeStatusController extends Controller
             // Guardando as médias e as contagens
             $analista = ucwords(str_replace(".", " ", $analista));
             $nomesAnalistas[] = $analista;  // Lista de nomes de analistas
-            $mediasAssigned[] = sprintf('%02d:%02d:%02d', $hoursAssigned, $minutesAssigned, $secondsAssigned);  // Média formatada para time_assigned
-            $mediasFinished[] = sprintf('%02d:%02d:%02d', $hoursFinished, $minutesFinished, $secondsFinished);  // Média formatada para time_finished
+            // Média formatada para time_assigned
+            $mediasAssigned[] = sprintf('%02d:%02d:%02d', $hoursAssigned, $minutesAssigned, $secondsAssigned);
+            // Média formatada para time_finished
+            $mediasFinished[] = sprintf('%02d:%02d:%02d', $hoursFinished, $minutesFinished, $secondsFinished);
             $repeticoes[] = $dados['repeticoes']; // Número de vezes que o analista aparece
-            $sameAsFinishedCount[] = $dados['same_as_finished_count']; // Número de vezes que worklogsubmitter == finished_worklogsubmitter
+            // Número de vezes que worklogsubmitter == finished_worklogsubmitter
+            $sameAsFinishedCount[] = $dados['same_as_finished_count'];
         }
 
-        // Retornando um array em vez de um JSON, incluindo as contagens de worklogsubmitter == finished_worklogsubmitter
-        return compact('nomesAnalistas', 'mediasAssigned', 'mediasFinished', 'repeticoes', 'sameAsFinishedCount');
+        // Retornando um array em vez de um JSON,
+        // incluindo as contagens de worklogsubmitter == finished_worklogsubmitter
+        return compact(
+            'nomesAnalistas',
+            'mediasAssigned',
+            'mediasFinished',
+            'repeticoes',
+            'sameAsFinishedCount'
+        );
     }
 }

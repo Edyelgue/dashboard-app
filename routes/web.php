@@ -38,7 +38,7 @@ Route::get('/tickets-analysts-nm', [
 Route::get('/time-assigned', [
     ChangeStatusController::class,
     'index'
-])->name('time-assigned');
+])->name('time-assigned.index');
 
 Route::get('/time-assigned-nm', [
     ChangeStatusNMController::class,
