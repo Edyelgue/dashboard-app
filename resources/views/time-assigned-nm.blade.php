@@ -4,7 +4,7 @@
         <!-- Filtro de Datas -->
         <div class="w-1/5 bg-white shadow-md rounded-lg p-5 border">
             <h1 class="text-xl font-semibold mb-4">Filtro de Datas</h1>
-            <form method="GET" action="{{ route('time-assigned.index') }}" class="space-y-4">
+            <form method="GET" action="{{ route('time-assigned-nm') }}" class="space-y-4">
                 <div>
                     <label for="startDate" class="block text-sm font-medium text-gray-700">Data de Início</label>
                     <input type="date" id="startDate" name="startDate" value="{{ request('startDate') }}"
@@ -19,7 +19,7 @@
                     <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600">
                         Filtrar
                     </button>
-                    <a href="{{ url('/time-assigned') }}"
+                    <a href="{{ url('/time-assigned-nm') }}"
                        class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg shadow hover:bg-gray-400">
                         Limpar
                     </a>
@@ -39,13 +39,159 @@
 </section>
 <section class="text-gray-600 body-font">
     <div class="container px-1 py-[48px] mx-auto">
-        <div class="flex flex-col text-center w-full mb-[24px]">
+        <div class="flex flex-col text-center w-full mb-[12px]">
             <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-600">Incidentes</h1>
         </div>
         <div id="changes-list" class="w-full mx-auto overflow-auto">
             <div class="overflow-x-auto">
                 <table class="table table-xs">
                     <thead>
+                    <tr>
+                        <th>
+                            <div class="relative flex items-center border rounded-md">
+                                <input type="text" placeholder="Incidente"
+                                       class="font-normal text-sm w-full rounded-md pl-2 pr-8 border">
+                                <button
+                                    class="absolute right-2 bg-transparent p-1 text-gray-500 hover:text-gray-700 sort-btn"
+                                    data-column="incidentid" data-order="asc">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                         class="size-4">
+                                        <path fill-rule="evenodd"
+                                              d="M5.22 10.22a.75.75 0 0 1 1.06 0L8 11.94l1.72-1.72a.75.75 0 1 1 1.06 1.06l-2.25 2.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 0 1 0-1.06ZM10.78 5.78a.75.75 0 0 1-1.06 0L8 4.06 6.28 5.78a.75.75 0 0 1-1.06-1.06l2.25-2.25a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1 0 1.06Z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="relative flex items-center border rounded-md">
+                                <input type="text" placeholder="Designado por"
+                                       class="font-normal text-sm rounded-md w-full border">
+                                <button
+                                    class="absolute right-2 bg-transparent p-1 text-gray-500 hover:text-gray-700 sort-btn"
+                                    data-column="incidentid" data-order="asc">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                         class="size-4">
+                                        <path fill-rule="evenodd"
+                                              d="M5.22 10.22a.75.75 0 0 1 1.06 0L8 11.94l1.72-1.72a.75.75 0 1 1 1.06 1.06l-2.25 2.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 0 1 0-1.06ZM10.78 5.78a.75.75 0 0 1-1.06 0L8 4.06 6.28 5.78a.75.75 0 0 1-1.06-1.06l2.25-2.25a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1 0 1.06Z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="relative flex items-center border rounded-md">
+                                <input type="text" placeholder="Descrição"
+                                       class="font-normal text-sm rounded-md w-full border">
+                                <button
+                                    class="absolute right-2 bg-transparent p-1 text-gray-500 hover:text-gray-700 sort-btn"
+                                    data-column="incidentid" data-order="asc">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                         class="size-4">
+                                        <path fill-rule="evenodd"
+                                              d="M5.22 10.22a.75.75 0 0 1 1.06 0L8 11.94l1.72-1.72a.75.75 0 1 1 1.06 1.06l-2.25 2.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 0 1 0-1.06ZM10.78 5.78a.75.75 0 0 1-1.06 0L8 4.06 6.28 5.78a.75.75 0 0 1-1.06-1.06l2.25-2.25a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1 0 1.06Z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="relative flex items-center border rounded-md">
+                                <input type="text" placeholder="Data criado"
+                                       class="font-normal text-sm rounded-md w-full border">
+                                <button
+                                    class="absolute right-2 bg-transparent p-1 text-gray-500 hover:text-gray-700 sort-btn"
+                                    data-column="incidentid" data-order="asc">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                         class="size-4">
+                                        <path fill-rule="evenodd"
+                                              d="M5.22 10.22a.75.75 0 0 1 1.06 0L8 11.94l1.72-1.72a.75.75 0 1 1 1.06 1.06l-2.25 2.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 0 1 0-1.06ZM10.78 5.78a.75.75 0 0 1-1.06 0L8 4.06 6.28 5.78a.75.75 0 0 1-1.06-1.06l2.25-2.25a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1 0 1.06Z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="relative flex items-center border rounded-md">
+                                <input type="text" placeholder="Data designado"
+                                       class="font-normal text-sm rounded-md w-full border">
+                                <button
+                                    class="absolute right-2 bg-transparent p-1 text-gray-500 hover:text-gray-700 sort-btn"
+                                    data-column="incidentid" data-order="asc">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                         class="size-4">
+                                        <path fill-rule="evenodd"
+                                              d="M5.22 10.22a.75.75 0 0 1 1.06 0L8 11.94l1.72-1.72a.75.75 0 1 1 1.06 1.06l-2.25 2.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 0 1 0-1.06ZM10.78 5.78a.75.75 0 0 1-1.06 0L8 4.06 6.28 5.78a.75.75 0 0 1-1.06-1.06l2.25-2.25a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1 0 1.06Z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="relative flex items-center border rounded-md">
+                                <input type="text" placeholder="Tempo na fila"
+                                       class="font-normal text-sm rounded-md w-full border">
+                                <button
+                                    class="absolute right-2 bg-transparent p-1 text-gray-500 hover:text-gray-700 sort-btn"
+                                    data-column="incidentid" data-order="asc">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                         class="size-4">
+                                        <path fill-rule="evenodd"
+                                              d="M5.22 10.22a.75.75 0 0 1 1.06 0L8 11.94l1.72-1.72a.75.75 0 1 1 1.06 1.06l-2.25 2.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 0 1 0-1.06ZM10.78 5.78a.75.75 0 0 1-1.06 0L8 4.06 6.28 5.78a.75.75 0 0 1-1.06-1.06l2.25-2.25a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1 0 1.06Z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="relative flex items-center border rounded-md">
+                                <input type="text" placeholder="Data finalizado"
+                                       class="font-normal text-sm rounded-md w-full border">
+                                <button
+                                    class="absolute right-2 bg-transparent p-1 text-gray-500 hover:text-gray-700 sort-btn"
+                                    data-column="incidentid" data-order="asc">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                         class="size-4">
+                                        <path fill-rule="evenodd"
+                                              d="M5.22 10.22a.75.75 0 0 1 1.06 0L8 11.94l1.72-1.72a.75.75 0 1 1 1.06 1.06l-2.25 2.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 0 1 0-1.06ZM10.78 5.78a.75.75 0 0 1-1.06 0L8 4.06 6.28 5.78a.75.75 0 0 1-1.06-1.06l2.25-2.25a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1 0 1.06Z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="relative flex items-center border rounded-md">
+                                <input type="text" placeholder="Finalizado em"
+                                       class="font-normal text-sm rounded-md w-full border">
+                                <button
+                                    class="absolute right-2 bg-transparent p-1 text-gray-500 hover:text-gray-700 sort-btn"
+                                    data-column="incidentid" data-order="asc">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                         class="size-4">
+                                        <path fill-rule="evenodd"
+                                              d="M5.22 10.22a.75.75 0 0 1 1.06 0L8 11.94l1.72-1.72a.75.75 0 1 1 1.06 1.06l-2.25 2.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 0 1 0-1.06ZM10.78 5.78a.75.75 0 0 1-1.06 0L8 4.06 6.28 5.78a.75.75 0 0 1-1.06-1.06l2.25-2.25a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1 0 1.06Z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="relative flex items-center border rounded-md">
+                                <input type="text" placeholder="Status"
+                                       class="font-normal text-sm rounded-md w-full border">
+                                <button
+                                    class="absolute right-2 bg-transparent p-1 text-gray-500 hover:text-gray-700 sort-btn"
+                                    data-column="incidentid" data-order="asc">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                         class="size-4">
+                                        <path fill-rule="evenodd"
+                                              d="M5.22 10.22a.75.75 0 0 1 1.06 0L8 11.94l1.72-1.72a.75.75 0 1 1 1.06 1.06l-2.25 2.25a.75.75 0 0 1-1.06 0l-2.25-2.25a.75.75 0 0 1 0-1.06ZM10.78 5.78a.75.75 0 0 1-1.06 0L8 4.06 6.28 5.78a.75.75 0 0 1-1.06-1.06l2.25-2.25a.75.75 0 0 1 1.06 0l2.25 2.25a.75.75 0 0 1 0 1.06Z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </th>
+                    </tr>
                     <tr>
                         <th>Incidente</th>
                         <th>Designado por</th>
@@ -75,13 +221,9 @@
                     </tbody>
                 </table>
             </div>
-            <!-- Adicione os links de paginação aqui -->
-            <div class="mt-4">
-                {{ $changes->links() }}
-            </div>
         </div>
     </div>
 </section>
-@include('components.script-filter')
+@include('components.list-tickets')
 @include('components.time-assigned-script-nm')
 @include('layouts.footer')

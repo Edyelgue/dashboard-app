@@ -222,6 +222,8 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
 </section>
 @include('components.list-tickets')
 @include('components.time-assigned-script')
