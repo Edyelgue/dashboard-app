@@ -1,54 +1,87 @@
 @include('layouts.header')
 <section class="text-gray-600 body-font pt-[90px]">
-  <div class="border shadow-[5px_5px_15px_4.5px_rgba(0,0,0,0.1)] container mx-auto flex flex-col px-5 py-2 justify-center items-center rounded-lg text-gray-100 w-2/3" data-theme="light">
-    <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-700">Desempenho por Analista - Monitoramento</h1>
-    <canvas id="myChart" class="h-full w-full pt-[24px]"></canvas>
-  </div>
+    <div class="container mx-auto flex flex-wrap justify-between items-start">
+        <!-- Filtro de Datas -->
+        <div class="w-1/5 bg-white shadow-md rounded-lg p-5 border">
+            <h1 class="text-xl font-semibold mb-4">Filtro de Datas</h1>
+            <form method="GET" action="{{ route('time-assigned.index') }}" class="space-y-4">
+                <div>
+                    <label for="startDate" class="block text-sm font-medium text-gray-700">Data de Início</label>
+                    <input type="date" id="startDate" name="startDate" value="{{ request('startDate') }}"
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+                <div>
+                    <label for="endDate" class="block text-sm font-medium text-gray-700">Data de Término</label>
+                    <input type="date" id="endDate" name="endDate" value="{{ request('endDate') }}"
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+                <div class="flex space-x-2">
+                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600">
+                        Filtrar
+                    </button>
+                    <a href="{{ url('/time-assigned') }}"
+                       class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg shadow hover:bg-gray-400">
+                        Limpar
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Gráfico -->
+        <div
+            class="border shadow-[5px_5px_15px_4.5px_rgba(0,0,0,0.1)] container mx-auto flex flex-col px-5 py-2 justify-center items-center rounded-lg text-gray-100 w-2/3"
+            data-theme="light">
+            <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-700">Desempenho por Analista -
+                Monitoramento</h1>
+            <canvas id="myChart" class="h-full w-full pt-[24px]"></canvas>
+        </div>
+    </div>
 </section>
 <section class="text-gray-600 body-font">
-  <div class="container px-1 py-[48px] mx-auto">
-    <div class="flex flex-col text-center w-full mb-[24px]">
-      <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-600">Incidentes</h1>
+    <div class="container px-1 py-[48px] mx-auto">
+        <div class="flex flex-col text-center w-full mb-[24px]">
+            <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-600">Incidentes</h1>
+        </div>
+        <div id="changes-list" class="w-full mx-auto overflow-auto">
+            <div class="overflow-x-auto">
+                <table class="table table-xs">
+                    <thead>
+                    <tr>
+                        <th>Incidente</th>
+                        <th>Designado por</th>
+                        <th>Descrição</th>
+                        <th>Data criado</th>
+                        <th>Data designado</th>
+                        <th>Tempo na fila</th>
+                        <th>Data finalizado</th>
+                        <th>Finalizado em</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody id="changes-tbody">
+                    @foreach ($changes as $change)
+                        <tr>
+                            <td>{{ $change->incidentid }}</td>
+                            <td>{{ $change->worklogsubmitter }}</td>
+                            <td>{{ $change->incidentsummary }}</td>
+                            <td>{{ $change->earliest_submit_date }}</td>
+                            <td>{{ $change->min_createdate }}</td>
+                            <td>{{ $change->time_assigned }}</td>
+                            <td>{{ $change->finished_datetime }}</td>
+                            <td>{{ $change->time_finished }}</td>
+                            <td>{{ $change->status }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <!-- Adicione os links de paginação aqui -->
+            <div class="mt-4">
+                {{ $changes->links() }}
+            </div>
+        </div>
     </div>
-    <div id="changes-list" class="w-full mx-auto overflow-auto">
-      <div class="overflow-x-auto">
-        <table class="table table-xs">
-          <thead>
-            <tr>
-              <th>Incidente</th>
-              <th>Designado por</th>
-              <th>Descrição</th>
-              <th>Data criado</th>
-              <th>Data designado</th>
-              <th>Tempo na fila</th>
-              <th>Data finalizado</th>
-              <th>Finalizado em</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="changes-tbody">
-            @foreach ($changes as $change)
-            <tr>
-              <td>{{ $change->incidentid }}</td>
-              <td>{{ $change->worklogsubmitter }}</td>
-              <td>{{ $change->incidentsummary }}</td>
-              <td>{{ $change->earliest_submit_date }}</td>
-              <td>{{ $change->min_createdate }}</td>
-              <td>{{ $change->time_assigned }}</td>
-              <td>{{ $change->finished_datetime }}</td>
-              <td>{{ $change->time_finished }}</td>
-              <td>{{ $change->status }}</td>
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
-      <!-- Adicione os links de paginação aqui -->
-      <div class="mt-4">
-        {{ $changes->links() }}
-      </div>
-    </div>
-  </div>
 </section>
+@include('components.script-filter')
 @include('components.time-assigned-script-nm')
 @include('layouts.footer')

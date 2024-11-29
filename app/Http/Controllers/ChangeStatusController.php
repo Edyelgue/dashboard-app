@@ -42,16 +42,16 @@ class ChangeStatusController extends Controller
         }
 
         // Obter os dados de média e as contagens (se aplicável)
-        $mediaData = $this->media();
+        $mediaData = $this->media($startDate, $endDate);
 
         // Renderizar a view com os dados
         return $this->renderizarView('time-assigned', array_merge(['changes' => $changes], $mediaData));
     }
 
-    public function media()
+    public function media($startDate, $endDate)
     {
         // Chamando o metodo listar()
-        $changes = ChangeStatusDTO::listar();
+        $changes = ChangeStatusDTO::listar($startDate, $endDate);
 
         // Inicializando array para agrupar os tempos e a contagem por analista
         $analistas = [];
