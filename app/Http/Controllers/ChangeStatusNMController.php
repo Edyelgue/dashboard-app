@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ChangeStatusNMDTO;
 use Carbon\Carbon;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Request;
 
 class ChangeStatusNMController extends Controller
 {
@@ -13,20 +13,22 @@ class ChangeStatusNMController extends Controller
         return view($view, $data);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $perPage = 20;
 
-        
+        // Capturando os filtros de data
+        $startDate = $request->has('startDate')
+            ? Carbon::parse($request->input('startDate'))->format('Y-m-d')
+            : null;
+
+        $endDate = $request->has('endDate')
+            ? Carbon::parse($request->input('endDate'))->format('Y-m-d')
+            : null;
+
         // Obter a lista de changes
-        $changesCollection = collect(ChangeStatusNMDTO::listar());
+        $changes = ChangeStatusNMDTO::listar($startDate, $endDate);
 
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $changes = $changesCollection->slice(($currentPage - 1) * $perPage, $perPage)->all();
-        // @change TValue $change
-        /**
-        * @var object $change
-        */
+        // Formatando os campos de data e tempo
         foreach ($changes as $change) {
             $change->earliest_submit_date = Carbon::parse($change->earliest_submit_date)->format('d/m/Y H:i:s');
             $change->min_createdate = Carbon::parse($change->min_createdate)->format('d/m/Y H:i:s');
@@ -49,25 +51,18 @@ class ChangeStatusNMController extends Controller
             }
         }
 
-        $paginatedChanges = new LengthAwarePaginator(
-            $changes,
-            $changesCollection->count(),
-            $perPage,
-            $currentPage,
-            ['path' => LengthAwarePaginator::resolveCurrentPath()]
-        );
-
         // Obter os dados de média e as contagens
-        $mediaData = $this->media();
+        $mediaData = $this->media($startDate, $endDate);
 
         // Passando os dados para a view
-        return $this->renderizarView('time-assigned-nm', array_merge(['changes' => $paginatedChanges], $mediaData));
+        return $this->renderizarView('time-assigned-nm', array_merge(['changes' => $changes], $mediaData));
     }
 
-    public function media()
+
+    public function media($startDate, $endDate)
     {
-        // Chamando o método listar()
-        $changes = ChangeStatusNMDTO::listar();
+        // Chamando o metodo listar()
+        $changes = ChangeStatusNMDTO::listar($startDate, $endDate);
 
         // Inicializando array para agrupar os tempos e a contagem por analista
         $analistas = [];

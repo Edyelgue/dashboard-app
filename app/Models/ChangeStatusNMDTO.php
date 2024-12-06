@@ -7,9 +7,9 @@ use Carbon\Carbon;
 
 class ChangeStatusNMDTO
 {
-    public static function listar()
+    public static function listar($startDate = null, $endDate = null)
     {
-        return DB::connection('sqlite')
+        $query = DB::connection('sqlite')
             ->table('change_status_incident')
             ->select(
                 'worklogsubmitter',
@@ -30,14 +30,25 @@ class ChangeStatusNMDTO
                 'miguel.amaral',
                 'jeferson.dorta'
             ])
-            ->where('incidentsummary', 'not like', '%GMUD%') // Exclui registros com 'GMUD' no incidentid
-            ->whereDate('min_createdate', '>=', Carbon::now()->subDays(7)) // Filtra registros dos últimos 7 dias
+            ->where('incidentsummary', 'not like', '%GMUD%'); // Exclui registros com 'GMUD'
+
+        // Aplicar os filtros de data, se fornecidos
+        if ($startDate) {
+            $query->whereDate('earliest_submit_date', '>=', $startDate);
+        }
+
+        if ($endDate) {
+            $query->whereDate('earliest_submit_date', '<=', $endDate);
+        }
+
+        return $query
             ->groupBy(
                 'incidentid',
                 'worklogsubmitter',
-                'finished_worklogsubmitter' // Inclui no agrupamento para evitar erros de agregação
+                'finished_worklogsubmitter'
             )
             ->orderByDesc('time_assigned')
             ->get();
+
     }
 }

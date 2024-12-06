@@ -43,7 +43,7 @@
             scales: {
                 y: {
                     beginAtZero: true,
-                    grace: '10%'
+                    grace: '20%'
                 }
             }
         },
@@ -95,7 +95,7 @@
             scales: {
                 y: {
                     beginAtZero: true,
-                    grace: '10%'
+                    grace: '20%'
                 }
             }
         },
@@ -150,7 +150,7 @@
             scales: {
                 y: {
                     beginAtZero: true,
-                    grace: '10%'
+                    grace: '20%'
                 }
             }
         },
@@ -212,7 +212,7 @@
             scales: {
                 y: {
                     beginAtZero: true,
-                    grace: '10%'
+                    grace: '20%'
                 }
             }
         },

@@ -206,7 +206,7 @@
                     </thead>
                     <tbody id="changes-tbody">
                     @foreach ($changes as $change)
-                        <tr>
+                        <tr class="h-12">
                             <td>{{ $change->incidentid }}</td>
                             <td>{{ $change->worklogsubmitter }}</td>
                             <td>{{ $change->incidentsummary }}</td>
@@ -220,10 +220,12 @@
                     @endforeach
                     </tbody>
                 </table>
+                <div id="pagination" class="join mx-auto flex justify-center container mt-10"></div>
             </div>
         </div>
     </div>
 </section>
+@include('components.pagination')
 @include('components.list-tickets')
 @include('components.time-assigned-script-nm')
 @include('layouts.footer')

@@ -1,84 +1,100 @@
 @include('layouts.header')
 <main class="mx-2">
     <div class="w-full flex-col pt-[90px]">
-        <h1 class="sm:text-4xl text-3xl title-font font-bold rounded-box grid h-20 place-items-center text-gray-900" data-theme="light">Tickets Fechados/Cancelados - N1</h1>
+        <h1 class="sm:text-4xl text-3xl title-font font-bold rounded-box grid h-20 place-items-center text-gray-900"
+            data-theme="light">Tickets Fechados/Cancelados - N1</h1>
     </div>
 
-    <!-- CARDS -->
-    <section class="text-gray-900 body-font w-full mb-1">
-        <div class="flex mt-1">
-            <div class="w-1/3 border rounded-lg">
-                <div class="rounded-lg" data-theme="light">
-                    <div class="w-full h-10 inline-flex items-center justify-center rounded text-indigo-500 mb-4">
-                        <h2 class="text-lg text-gray-900 title-font font-bold">Tickets Fechados</h2>
-                    </div>
-                    <div class="text-center">
-                        <h3 class="text-xl text-gray-900 font-medium title-font mb-2">
-                            {{ round(($chartData['totalFechados'] / $chartData['totalGeral']) * 100, 1) }}%
-                        </h3>
-                    </div>
-                    <div class="text-center p-2">
-                        <h4 class="text-sm text-gray-900 font-medium title-font">
-                            {{$chartData['totalFechados']}}
-                        </h4>
+    <section class="flex h-full">
+        <section class="w-1/6 mr-2 border-r-2 border-r-yellow-400">
+            <div class="container mx-auto flex flex-wrap justify-between items-start">
+                <!-- Filtro de Datas -->
+                <div class="w-full bg-white shadow-md card p-5 border mr-2">
+                    <h1 class="text-xl font-semibold mb-4">Filtro de Datas</h1>
+                    <form method="GET" action="{{ route('time-assigned.index') }}" class="space-y-4">
+                        <div>
+                            <label for="startDate" class="block text-sm font-medium text-gray-700">Data de
+                                Início</label>
+                            <input type="date" id="startDate" name="startDate" value="{{ request('startDate') }}"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        </div>
+                        <div>
+                            <label for="endDate" class="block text-sm font-medium text-gray-700">Data de Término</label>
+                            <input type="date" id="endDate" name="endDate" value="{{ request('endDate') }}"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        </div>
+                        <div class="flex space-x-2 justify-center">
+                            <button type="submit"
+                                class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600">
+                                Filtrar
+                            </button>
+                            <a href="{{ url('/time-assigned') }}"
+                                class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg shadow hover:bg-gray-400">
+                                Limpar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+        </section>
+
+        <section class="w-5/6">
+            <!-- CARDS 2.0 -->
+            <section class="flex justify-between">
+                <div class="card bg-base-100 w-1/3 shadow-xl border">
+                    <div class="card-body text-center">
+                        <h2 class="font-bold">Tickets Fechados</h2>
+                        <div>
+                            <h3 class="font-bold text-xl">
+                                {{ round(($chartData['totalFechados'] / $chartData['totalGeral']) * 100, 1) }}%
+                            </h3>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="w-1/3 mx-1 border rounded-lg">
-                <div class="rounded-lg" data-theme="light">
-                    <div class="w-full h-10 inline-flex items-center justify-center rounded text-indigo-500 mb-4">
-                        <h2 class="text-lg text-gray-900 title-font font-bold">Tickets Cancelados</h2>
-                    </div>
-                    <div class="text-center">
-                        <h3 class="text-xl text-gray-900 font-medium title-font mb-2">
-                            {{ round(($chartData['totalCancelados'] / $chartData['totalGeral']) * 100, 1)}}%
-                        </h3>
-                    </div>
-                    <div class="text-center p-2">
-                        <h4 class="text-sm text-gray-900 font-medium title-font">
-                            {{$chartData['totalCancelados']}}
-                        </h4>
+
+                <div class="card bg-base-100 w-1/3 shadow-xl border mx-2">
+                    <div class="card-body text-center">
+                        <h2 class="font-bold">Tickets Cancelados</h2>
+                        <div>
+                            <h3 class="font-bold text-xl">
+                                {{ round(($chartData['totalCancelados'] / $chartData['totalGeral']) * 100, 1)}}%
+                            </h3>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="w-1/3 border rounded-lg">
-                <div class="rounded-lg" data-theme="light">
-                    <div class="w-full h-10 inline-flex items-center justify-center rounded text-indigo-500 mb-4">
-                        <h2 class="text-lg text-gray-900 title-font font-bold">Total</h2>
-                    </div>
-                    <div class="text-center">
-                        <h3 class="text-xl text-gray-900 font-medium title-font mb-2">
-                            {{$chartData['totalGeral']}}
-                        </h3>
-                    </div>
-                    <div class="text-center p-2">
-                        <h4 class="text-sm text-gray-900 font-medium title-font">&nbsp;</h4>
+
+                <div class="card bg-base-100 w-1/3 shadow-xl border">
+                    <div class="card-body text-center">
+                        <h2 class="font-bold">Total Tickets Finalizados (Qtd)</h2>
+                        <div>
+                            <h3 class="font-bold text-xl">
+                                {{$chartData['totalGeral']}}
+                            </h3>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- GRAPHS -->
-    <section class="lg:flex mt-0 w-3/3">
-        <div class="lg:w-1/3 w-3/3 flex h-full lg:my-0 mb-1 rounded-lg border shadow-[5px_5px_15px_4.5px_rgba(0,0,0,0.1)]" data-theme="light">
-            <canvas id="closedTicketsChart" class="p-2"></canvas>
-        </div>
+            <!-- GRAPHS 2.0 -->
+            <section class="text-center items-center flex justify-between mt-4">
+                <div class="card w-1/2 shadow-xl border text-center items-center align-text-middle mr-1">
+                    <canvas id="closedTicketsChart" class="p-2"></canvas>
+                </div>
 
-        <div class="lg:w-1/3 w-3/3 flex h-full md:my-0 rounded-lg lg:mx-1 border shadow-[5px_5px_15px_4.5px_rgba(0,0,0,0.1)]" data-theme="light">
-            <canvas id="canceledTicketsChart" class="p-2"></canvas>
-        </div>
+                <div class="card w-1/2 shadow-xl border text-center items-center align-text-middle ml-1">
+                    <canvas id="canceledTicketsChart" class="p-2"></canvas>
+                </div>
+            </section>
 
-        <div class="lg:w-1/3 w-3/3 flex h-full my-1 lg:my-0 rounded-lg border shadow-[5px_5px_15px_4.5px_rgba(0,0,0,0.1)]" data-theme="light">
-            <canvas id="totalTicketsChart" class="p-2"></canvas>
-        </div>
-    </section>
+            <section class="text-center items-center flex justify-between mt-4">
+                <div class="card w-1/2 shadow-xl border text-center items-center align-text-middle mr-1">
+                    <canvas id="totalTicketsChart" class="p-2"></canvas>
+                </div>
 
-    <!-- GRAPH UNIQUE -->
-    <section class="lg:container">
-        <div class="rounded-lg my-1 lg:h-96 lg:w-1/2 flex border shadow-[5px_5px_15px_4.5px_rgba(0,0,0,0.1)]" data-theme="light">
-            <canvas id="canceldAndClosed" class="p-2 h-full"></canvas>
-        </div>
+                <div class="card w-1/2 shadow-xl border text-center items-center align-text-middle ml-1">
+                    <canvas id="canceldAndClosed" class="p-2 h-full"></canvas>
+                </div>
+            </section>
+        </section>
     </section>
 </main>
 @include('components.tickets-analysts-script')

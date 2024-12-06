@@ -13,41 +13,41 @@
   const data = {
     labels: analistas,
     datasets: [{
-        label: 'Tempo Médio p/Designar (h)',
-        data: mediasAssigned.map(timeToSeconds),
-        backgroundColor: '#F2BB0580',
+      label: 'Tempo Médio p/Designar (h)',
+      data: mediasAssigned.map(timeToSeconds),
+      backgroundColor: '#F2BB0580',
         // borderColor: '#F2BB0580',
         // borderWidth: 1,
-        yAxisID: 'y',
-      },
-      {
-        label: 'Assumido por analista',
-        data: incByAnalist,
-        type: 'line',
-        backgroundColor: '#84a9c0',
-        borderColor: '#84a9c0',
-        borderWidth: 2,
-        fill: false,
-        yAxisID: 'y1',
-      },
-      {
-        label: 'Fechados por Analista',
-        data: sameAsFinishedCount,
-        type: 'line',
-        backgroundColor: 'rgb(251, 139, 36)',
-        borderColor: 'rgb(251, 139, 36)',
-        borderWidth: 2,
-        fill: false,
-        yAxisID: 'y1',
-      },
-      {
-        label: 'Tempo Médio p/Finalização (h)',
-        data: mediasFinished.map(timeToSeconds),
-        backgroundColor: '#ac050680',
+      yAxisID: 'y',
+    },
+    {
+      label: 'Assumido por analista',
+      data: incByAnalist,
+      type: 'line',
+      backgroundColor: '#84a9c0',
+      borderColor: '#84a9c0',
+      borderWidth: 2,
+      fill: false,
+      yAxisID: 'y1',
+    },
+    {
+      label: 'Fechados por Analista',
+      data: sameAsFinishedCount,
+      type: 'line',
+      backgroundColor: 'rgb(251, 139, 36)',
+      borderColor: 'rgb(251, 139, 36)',
+      borderWidth: 2,
+      fill: false,
+      yAxisID: 'y1',
+    },
+    {
+      label: 'Tempo Médio p/Finalização (h)',
+      data: mediasFinished.map(timeToSeconds),
+      backgroundColor: '#ac050680',
         // borderColor: '#6e0e0a80',
         // borderWidth: 1,
-        yAxisID: 'y',
-      }
+      yAxisID: 'y',
+    }
     ]
   };
 
@@ -155,7 +155,7 @@
   const myChart = new Chart(
     document.getElementById('myChart'),
     config
-  );
+    );
 
   // Converte hh:mm:ss para segundos
   function timeToSeconds(time) {

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class ChangeStatusDTO
 {
