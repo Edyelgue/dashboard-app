@@ -19,11 +19,22 @@ class FinishedStatusNMDTO
                 DB::raw('count(*) as total')
             )
             ->whereIn('finished_worklogsubmitter', [
+                'jean.novaes',
                 'henrique.oliveira',
                 'vitor.domingues',
-                'joao.souza',
+                'jeferson.dorta',
+                'camilly.psilva',
                 'miguel.amaral',
-                'jeferson.dorta'
+                'luan.pereira',
+                'murilo.medeiros',
+                'mateus.tofani',
+                'joao.souza',
+                'lucas.angelo',
+                'leopoldo.junior',
+                'evandro.pereira',
+                'vinicyus.santos',
+                'vinicius.mareti',
+                'jefferson.correia'
             ])
             ->groupBy('finished_worklogsubmitter', 'status')
             ->get()

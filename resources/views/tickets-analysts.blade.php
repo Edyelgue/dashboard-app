@@ -2,7 +2,7 @@
 <main class="mx-2">
     <div class="w-full flex-col pt-[90px]">
         <h1 class="sm:text-4xl text-3xl title-font font-bold rounded-box grid h-20 place-items-center text-gray-900"
-            data-theme="light">Tickets Fechados/Cancelados - N1</h1>
+            data-theme="light">Tickets Fechados/Cancelados - Rede Metro</h1>
     </div>
 
     <section class="flex h-full">
@@ -75,16 +75,6 @@
             </section>
 
             <!-- GRAPHS 2.0 -->
-            <section class="text-center items-center flex justify-between mt-4">
-                <div class="card w-1/2 shadow-xl border text-center items-center align-text-middle mr-1">
-                    <canvas id="closedTicketsChart" class="p-2"></canvas>
-                </div>
-
-                <div class="card w-1/2 shadow-xl border text-center items-center align-text-middle ml-1">
-                    <canvas id="canceledTicketsChart" class="p-2"></canvas>
-                </div>
-            </section>
-
             <section class="text-center items-center flex justify-between mt-4">
                 <div class="card w-1/2 shadow-xl border text-center items-center align-text-middle mr-1">
                     <canvas id="totalTicketsChart" class="p-2"></canvas>

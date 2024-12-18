@@ -19,22 +19,13 @@ class FinishedStatusDTO
                 DB::raw('count(*) as total')
             )
             ->whereIn('finished_worklogsubmitter', [
-                'edgard.araujo',
-                'marcos.jesus',
                 'samuel.fagundes',
-                'samuel.souza',
-                'evandro.pereira',
-                'camilly.psilva',
-                'jeferson.dorta',
-                'gabriel.martins',
-                'mateus.tofani',
-                'murilo.medeiros',
+                'marcos.jesus',
+                'edgard.araujo',
                 'otavio.souza',
-                'lucas.angelo',
-                'eduardo.rezende',
+                'gabriel.martins',
                 'jepherson.lins',
-                'pedro.santos',
-                'vinicius.mareti'
+                'pedro.santos'
             ])
             ->groupBy('finished_worklogsubmitter', 'status')
             ->get()

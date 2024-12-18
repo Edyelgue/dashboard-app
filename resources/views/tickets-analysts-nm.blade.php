@@ -1,7 +1,7 @@
 @include('layouts.header')
 <section class="w-full flex items-center justify-center pt-[90px]">
     <div class="container justify-center items-center text-center w-full mb-2">
-        <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-600">Tickets Fechados/Cancelados - Monitoramento</h1>
+        <h1 class="sm:text-4xl text-3xl font-bold title-font mb-2 text-gray-600">Tickets Fechados/Cancelados - Multi</h1>
     </div>
 </section>
 
@@ -75,16 +75,6 @@
             </section>
 
             <!-- GRAPHS 2.0 -->
-            <section class="text-center items-center flex justify-between mt-4">
-                <div class="card w-1/2 shadow-xl border text-center items-center align-text-middle mr-1">
-                    <canvas id="closedTicketsChart" class="p-2"></canvas>
-                </div>
-
-                <div class="card w-1/2 shadow-xl border text-center items-center align-text-middle ml-1">
-                    <canvas id="canceledTicketsChart" class="p-2"></canvas>
-                </div>
-            </section>
-
             <section class="text-center items-center flex justify-between mt-4">
                 <div class="card w-1/2 shadow-xl border text-center items-center align-text-middle mr-1">
                     <canvas id="totalTicketsChart" class="p-2"></canvas>

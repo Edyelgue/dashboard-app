@@ -1,9 +1,17 @@
 <script>
-    // Grafico de tickets fechados por analista
+    // Dados dos gráficos
     const chartData = @json($chartData);
 
-    chartData.totalGeral
+    // Função para inicializar um gráfico
+    function initializeChart(elementId, config) {
+        const chartElement = document.getElementById(elementId);
+        if (chartElement) {
+            return new Chart(chartElement, config);
+        }
+        return null;
+    }
 
+    // Configuração e inicialização do gráfico de tickets fechados
     const dataClosed = {
         labels: chartData.labels,
         datasets: [{
@@ -23,42 +31,18 @@
             responsive: true,
             maintainAspectRatio: true,
             plugins: {
-                legend: {
-                    display: true
-                },
-                datalabels: {
-                    display: 'auto',
-                    clamp: true,
-                    clip: true,
-                    anchor: 'end',
-                    align: 'end',
-                    offset: '2',
-                    color: '#666666',
-                    font: {
-                        weight: 'regular'
-                    }
-                },
-                title: {
-                    display: true,
-                    text: 'Total de Tickets Fechados por Analista'
-                }
+                legend: { display: true },
+                title: { display: true, text: 'Total de Tickets Fechados por Analista' }
             },
             scales: {
-                y: {
-                    beginAtZero: true,
-                    grace: '20%'
-                }
+                y: { beginAtZero: true, grace: '20%' }
             }
-        },
-        plugins: [ChartDataLabels]
+        }
     };
 
-    const myChart = new Chart(
-        document.getElementById('closedTicketsChart'),
-        configClosed
-    );
+    initializeChart('closedTicketsChart', configClosed);
 
-    // Grafico de tickets cancelados por analista
+    // Configuração e inicialização do gráfico de tickets cancelados
     const dataCanceled = {
         labels: chartData.labels,
         datasets: [{
@@ -78,42 +62,18 @@
             responsive: true,
             maintainAspectRatio: true,
             plugins: {
-                legend: {
-                    display: true
-                },
-                datalabels: {
-                    display: 'auto',
-                    clamp: true,
-                    clip: true,
-                    anchor: 'end',
-                    align: 'end',
-                    offset: '2',
-                    color: '#666666',
-                    font: {
-                        weight: 'regular'
-                    }
-                },
-                title: {
-                    display: true,
-                    text: 'Total de Tickets Cancelados por Analista'
-                }
+                legend: { display: true },
+                title: { display: true, text: 'Total de Tickets Cancelados por Analista' }
             },
             scales: {
-                y: {
-                    beginAtZero: true,
-                    grace: '20%'
-                }
+                y: { beginAtZero: true, grace: '20%' }
             }
-        },
-        plugins: [ChartDataLabels]
+        }
     };
 
-    const myChart2 = new Chart(
-        document.getElementById('canceledTicketsChart'),
-        configCanceled
-    );
+    initializeChart('canceledTicketsChart', configCanceled);
 
-    // Grafico de total de tickets por analista
+    // Configuração e inicialização do gráfico de total de tickets
     const dataTotal = {
         labels: chartData.labels,
         datasets: [{
@@ -132,47 +92,35 @@
         options: {
             responsive: true,
             maintainAspectRatio: true,
-
             plugins: {
-                legend: {
-                    display: true
-                },
+                legend: { display: true },
+                title: { display: true, text: 'Total de Tickets por Analista' },
                 datalabels: {
-                    display: 'auto',
-                    clamp: true,
-                    clip: true,
-                    anchor: 'end',
-                    align: 'end',
-                    offset: '1',
-                    color: '#666666',
-                    font: {
-                        weight: 'regular'
-                    }
-                },
-                title: {
                     display: true,
-                    text: 'Total de Tickets por Analista'
-                }
+                    color: '#000',
+                    font: {
+                        weight: 'regular',
+                        size: 12
+                    },
+                    anchor: 'end',
+                    align: 'top',
+                    formatter: (value) => value // Exibe o valor original
+                },
             },
             scales: {
-                y: {
-                    beginAtZero: true,
-                    grace: '20%'
-                }
+                y: { beginAtZero: true, grace: '20%' }
             }
         },
-        plugins: [ChartDataLabels]
+        plugins: [ChartDataLabels] // Certifique-se de incluir o plugin
     };
 
-    const myChart3 = new Chart(
-        document.getElementById('totalTicketsChart'),
-        configTotal
-    );
+    initializeChart('totalTicketsChart', configTotal);
 
-    // Grafico de total de tickets fechados e cancelados por analista
+    // Configuração e inicialização do gráfico de tickets fechados/cancelados
     const dataClosedAndCanceled = {
         labels: chartData.labels,
-        datasets: [{
+        datasets: [
+            {
                 label: 'Fechados',
                 data: chartData.datasets[0].data,
                 backgroundColor: 'rgba(235, 181, 30, 0.2)',
@@ -187,7 +135,7 @@
                 borderColor: 'rgba(172,36,7, 1)',
                 borderWidth: 1,
                 yAxisID: 'y'
-            },
+            }
         ]
     };
 
@@ -198,38 +146,26 @@
             responsive: true,
             maintainAspectRatio: true,
             plugins: {
-                legend: {
-                    display: true
-                },
+                legend: { display: true },
+                title: { display: true, text: 'Tickets Fechados/Cancelados por Analista' },
                 datalabels: {
-                    display: 'auto',
-                    clamp: true,
-                    clip: true,
-                    anchor: 'end',
-                    align: 'end',
-                    offset: '2',
-                    color: '#666666',
-                    font: {
-                        weight: 'regular'
-                    }
-                },
-                title: {
                     display: true,
-                    text: 'Tickets Fechados/Cancelados por Analista'
-                }
+                    color: '#000',
+                    font: {
+                        weight: 'regular',
+                        size: 12
+                    },
+                    anchor: 'end',
+                    align: 'top',
+                    formatter: (value) => value // Exibe o valor original
+                },
             },
             scales: {
-                y: {
-                    beginAtZero: true,
-                    grace: '20%'
-                }
+                y: { beginAtZero: true, grace: '20%' }
             }
         },
-        plugins: [ChartDataLabels]
+        plugins: [ChartDataLabels] // Certifique-se de incluir o plugin
     };
 
-    const myChart4 = new Chart(
-        document.getElementById('canceldAndClosed'),
-        configClosedAndCanceled
-    );
+    initializeChart('canceldAndClosed', configClosedAndCanceled);
 </script>

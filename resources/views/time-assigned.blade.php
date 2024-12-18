@@ -31,7 +31,7 @@
         <div class="2xl:w-3/4 w-2/3 border shadow-lg rounded-lg px-6 py-4 flex flex-col items-center bg-white"
              data-theme="light">
             <h1 class="sm:text-4xl text-3xl font-bold title-font mb-4 text-gray-700">
-                Desempenho por Analista - N1
+                Desempenho por Analista - Rede Metro
             </h1>
             <canvas id="myChart" class="h-96 w-full"></canvas>
         </div>

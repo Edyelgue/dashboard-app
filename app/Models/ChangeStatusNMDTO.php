@@ -24,11 +24,22 @@ class ChangeStatusNMDTO
                 DB::raw('julianday(coalesce(finished_datetime, 0)) - julianday(coalesce(min_createdate, 0)) AS time_finished')
             )
             ->whereIn('worklogsubmitter', [
+                'jean.novaes',
                 'henrique.oliveira',
                 'vitor.domingues',
-                'joao.souza',
+                'jeferson.dorta',
+                'camilly.psilva',
                 'miguel.amaral',
-                'jeferson.dorta'
+                'luan.pereira',
+                'murilo.medeiros',
+                'mateus.tofani',
+                'joao.souza',
+                'lucas.angelo',
+                'leopoldo.junior',
+                'evandro.pereira',
+                'vinicyus.santos',
+                'vinicius.mareti',
+                'jefferson.correia'
             ])
             ->where('incidentsummary', 'not like', '%GMUD%'); // Exclui registros com 'GMUD'
 

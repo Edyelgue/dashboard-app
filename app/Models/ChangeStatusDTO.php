@@ -23,23 +23,13 @@ class ChangeStatusDTO
                 DB::raw('julianday(coalesce(finished_datetime, 0)) - julianday(coalesce(min_createdate, 0)) AS time_finished')
             )
             ->whereIn('worklogsubmitter', [
-                'edgard.araujo',
-                'marcos.jesus',
                 'samuel.fagundes',
-                'samuel.souza',
-                'evandro.pereira',
-                'camilly.psilva',
-                'jeferson.dorta',
-                'gabriel.martins',
-                'mateus.tofani',
-                'murilo.medeiros',
+                'marcos.jesus',
+                'edgard.araujo',
                 'otavio.souza',
-                'lucas.angelo',
-                'eduardo.rezende',
+                'gabriel.martins',
                 'jepherson.lins',
-                'pedro.santos',
-                'rafael.olima',
-                'vinicius.mareti'
+                'pedro.santos'
             ])
             ->where('incidentsummary', 'not like', '%GMUD%'); // Exclui registros com 'GMUD'
 
@@ -51,7 +41,7 @@ class ChangeStatusDTO
         if ($endDate) {
             $query->whereDate('earliest_submit_date', '<=', $endDate);
         }
-        
+
         return $query
             ->groupBy(
                 'incidentid',
