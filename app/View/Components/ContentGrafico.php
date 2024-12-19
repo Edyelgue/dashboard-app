@@ -6,15 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Titulo extends Component
+class ContentGrafico extends Component
 {
-    public $titulo;
     /**
      * Create a new component instance.
      */
-    public function __construct($titulo='')
+    public function __construct()
     {
-        $this->titulo = $titulo;
+        //
     }
 
     /**
@@ -22,6 +21,6 @@ class Titulo extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.titulo');
+        return view('components.content-grafico');
     }
 }
