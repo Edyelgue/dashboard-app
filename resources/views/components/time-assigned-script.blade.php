@@ -16,8 +16,8 @@
       label: 'Tempo Médio p/Designar (h)',
       data: mediasAssigned.map(timeToSeconds),
       backgroundColor: '#F2BB0580',
-        // borderColor: '#F2BB0580',
-        // borderWidth: 1,
+      // borderColor: '#F2BB0580',
+      // borderWidth: 1,
       yAxisID: 'y',
     },
     {
@@ -44,8 +44,8 @@
       label: 'Tempo Médio p/Finalização (h)',
       data: mediasFinished.map(timeToSeconds),
       backgroundColor: '#ac050680',
-        // borderColor: '#6e0e0a80',
-        // borderWidth: 1,
+      // borderColor: '#6e0e0a80',
+      // borderWidth: 1,
       yAxisID: 'y',
     }
     ]
@@ -57,13 +57,14 @@
     options: {
       font: {
         // color: '#FF0000', // Cor global para todas as fontes
+        size: 16
       },
       responsive: true, // Torna o gráfico responsivo
       maintainAspectRatio: true, // Permite ajustar a proporção ao redimensionar
       plugins: {
         tooltip: {
           callbacks: {
-            label: function(tooltipItem) {
+            label: function (tooltipItem) {
               console.log(tooltipItem)
               console.log(data)
 
@@ -81,6 +82,7 @@
         legend: {
           labels: {
             // color: '#c1c6cc', // Cor da fonte da legenda
+            size: 16
           },
           display: true
         },
@@ -90,7 +92,7 @@
           clip: true,
           anchor: 'end',
           align: 'end',
-          formatter: function(value, context) {
+          formatter: function (value, context) {
             // Formata o rótulo de tempo médio como hh:mm:ss e o rótulo de incidentes como inteiro
             if (context.dataset.label === 'Tempo Médio p/Designar (h)' || context.dataset.label === 'Tempo Médio p/Finalização (h)') {
               return secondsToTime(value); // Formata para hh:mm:ss
@@ -100,7 +102,8 @@
           },
           // color: '#c1c6cc', // Cor dos rotulos de barra
           font: {
-            weight: 'regular'
+            weight: 'regular',
+            size: 16 // Tamanho da fonte para a legenda
           }
         }
       },
@@ -120,31 +123,34 @@
           beginAtZero: true,
           grace: '10%',
           ticks: {
-            callback: function(value) {
+            callback: function (value) {
               return secondsToTime(value); // Converte para hh:mm:ss no eixo Y das barras
             },
             stepSize: 3600, // Intervalo dos ticks do eixo Y das barras
             // color: '#c1c6cc' // Cor das labels no eixo y
+            font: {
+              size: 12, // Tamanho da fonte dos rótulos no eixo Y
+            },
           }
         },
         y1: {
           grid: {
             drawOnChartArea: false, // Evita que a grade do y1 interfira no y
-            // color: '#0000FF', // Cor da grade no eixo Y1 (caso o `drawOnChartArea` seja `true`)
           },
           beginAtZero: true,
           position: 'right', // Posiciona o segundo eixo Y à direita
-          // grid: {
-          //   drawOnChartArea: false, // Evita que a grade do y1 interfira no y
-          // },
           grace: '10%',
           ticks: {
-            stepSize: 500, // Intervalo dos ticks do eixo Y da linha (incidentes)
-            // color: '#c1c6cc', // Cor das labels no eixo y
-            callback: function(value) {
-              return value; // Exibe os valores inteiros no eixo Y da linha
-            }
-          }
+            font: {
+              size: 11, // Tamanho da fonte
+              weight: '500', // Peso da fonte
+            },
+            color: '#fff', // Cor dos rótulos
+            stepSize: 500, // Intervalo dos ticks
+            callback: function (value) {
+              return value; // Exibe os valores inteiros no eixo Y1
+            },
+          },
         }
       }
     },
@@ -155,7 +161,7 @@
   const myChart = new Chart(
     document.getElementById('myChart'),
     config
-    );
+  );
 
   // Converte hh:mm:ss para segundos
   function timeToSeconds(time) {
@@ -168,6 +174,6 @@
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
-    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    return `${String(hours).padStart(1, '0')}h${String(minutes).padStart(2, '0')}m`; // :${String(secs).padStart(2, '0')}
   }
 </script>

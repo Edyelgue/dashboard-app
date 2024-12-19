@@ -23,11 +23,27 @@ class ChangeStatusDTO
                 DB::raw('julianday(coalesce(finished_datetime, 0)) - julianday(coalesce(min_createdate, 0)) AS time_finished')
             )
             ->whereIn('worklogsubmitter', [
+                'jean.novaes',
+                'henrique.oliveira',
+                'vitor.domingues',
+                'jeferson.dorta',
+                'camilly.psilva',
                 'samuel.fagundes',
                 'marcos.jesus',
                 'edgard.araujo',
+                'miguel.amaral',
+                'luan.pereira',
+                'murilo.medeiros',
+                'mateus.tofani',
+                'joao.souza',
+                'lucas.angelo',
                 'otavio.souza',
                 'gabriel.martins',
+                'leopoldo.junior',
+                'evandro.pereira',
+                'vinicyus.santos',
+                'vinicius.mareti',
+                'jefferson.correia',
                 'jepherson.lins',
                 'pedro.santos'
             ])

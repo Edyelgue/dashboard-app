@@ -1,8 +1,8 @@
 @include('layouts.header')
 <section class="text-gray-600 body-font pt-[90px]">
-    <div class="container mx-auto flex flex-wrap justify-between items-start">
+    <div class="container mx-auto flex flex-wrap 2xl:justify-between items-start">
         <!-- Filtro de Datas -->
-        <div class="w-1/5 bg-white shadow-md rounded-lg p-5 border">
+        <div class="w-1/8 bg-white shadow-md rounded-lg p-5 border mr-12">
             <h1 class="text-xl font-semibold mb-4">Filtro de Datas</h1>
             <form method="GET" action="{{ route('time-assigned.index') }}" class="space-y-4">
                 <div>
@@ -28,7 +28,7 @@
         </div>
 
         <!-- Gráfico -->
-        <div class="2xl:w-3/4 w-2/3 border shadow-lg rounded-lg px-6 py-4 flex flex-col items-center bg-white"
+        <div class="2xl:w-5/6 w-2/3 border shadow-lg rounded-lg px-6 py-4 flex flex-col items-center bg-white"
              data-theme="light">
             <h1 class="sm:text-4xl text-3xl font-bold title-font mb-4 text-gray-700">
                 Desempenho por Analista - Rede Metro
