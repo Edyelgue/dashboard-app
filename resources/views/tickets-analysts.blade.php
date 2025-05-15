@@ -1,8 +1,9 @@
 @include('layouts.header')
 <main class="mx-2">
     <div class="w-full flex-col pt-[90px]">
-        <h1 class="sm:text-4xl text-3xl title-font font-bold rounded-box grid h-20 place-items-center text-gray-900"
-            data-theme="light">Tickets Fechados/Cancelados - Rede Metro</h1>
+        <x-titulo>
+            Tickets Fechados/Cancelados - Rede Metro
+        </x-titulo>
     </div>
 
     <section class="flex h-full">
